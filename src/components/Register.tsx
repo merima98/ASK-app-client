@@ -36,7 +36,7 @@ function Register() {
   const signupMutation = useMutation(mutations.register, {
     onSuccess: (data) => {
       setIsLoggedIn(true, data.data.accessToken);
-      navigate("/home");
+      navigate("/");
     },
     onError: (error: ErrorOption) => {
       setError("email", error, { shouldFocus: true });

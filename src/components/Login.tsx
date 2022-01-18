@@ -36,7 +36,7 @@ function Login() {
   const loginMutation = useMutation(mutations.login, {
     onSuccess: (data) => {
       setIsLoggedIn(true, data.data.accessToken);
-      navigate("/home");
+      navigate("/");
     },
     onError: (error: ErrorOption) => {
       setError("email", error, { shouldFocus: true });
