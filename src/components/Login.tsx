@@ -36,6 +36,7 @@ function Login() {
   const loginMutation = useMutation(mutations.login, {
     onSuccess: (data) => {
       setIsLoggedIn(true, data.data.accessToken);
+      window.localStorage.setItem("userId", data.data.user.id);
       navigate("/");
     },
     onError: (error: ErrorOption) => {

@@ -35,6 +35,7 @@ function Register() {
   const toast = useToast();
   const signupMutation = useMutation(mutations.register, {
     onSuccess: (data) => {
+      window.localStorage.setItem("userId", data.data.user.id);
       setIsLoggedIn(true, data.data.accessToken);
       navigate("/");
     },

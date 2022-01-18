@@ -4,16 +4,19 @@ import { format } from "date-fns";
 import { Question } from "../../models/Question";
 
 function SingleQuestion(props: Question) {
-  const { content, dateOfCreation, dislikes, id, likes, user, userId } = props;
+  const { content, dateOfCreation, dislikes, id, likes, user } = props;
 
-  function convertDate(date: string) {
-    let dateParse = Date.parse(date);
-    let value = format(dateParse, "dd.MM.yyyy");
-    return value;
+  function convertDate(date?: string) {
+    if (date) {
+      let dateParse = Date.parse(date);
+      let value = format(dateParse, "dd.MM.yyyy");
+      return value;
+    }
   }
   return (
     <Center>
       <Flex
+        w={"50%"}
         flexDirection={"column"}
         padding={"1rem"}
         borderBottom={"3px solid"}
@@ -21,7 +24,7 @@ function SingleQuestion(props: Question) {
       >
         <Box fontSize={"0.85rem"}>{convertDate(dateOfCreation)}</Box>
         <Box fontSize={"0.85rem"} mb={"0.5rem"}>
-          {user.firstName} {user.lastName}
+          {user?.firstName} {user?.lastName}
         </Box>
         <Box fontSize={"1.5rem"} mb={"0.5rem"}>
           {content}
