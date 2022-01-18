@@ -11,7 +11,6 @@ import { toInteger } from "lodash";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import mutations from "../../api/mutations";
-import { Question } from "../../models/Question";
 
 function NewQuestion() {
   const {
@@ -38,7 +37,13 @@ function NewQuestion() {
 
   function onSubmit(values: FieldValues) {
     let content = values.content;
-    let newQuestion: Question = {
+    let newQuestion: {
+      content: string;
+      likes: number;
+      dislikes: number;
+      dateOfCreation: string;
+      userId: number;
+    } = {
       content: content,
       likes: 0,
       dislikes: 0,
@@ -51,7 +56,7 @@ function NewQuestion() {
   return (
     <Center>
       <Flex
-        w={"50%"}
+        w={"70%"}
         padding={"1rem"}
         borderBottom={"3px solid"}
         borderColor={"gray.200"}

@@ -1,10 +1,15 @@
-import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Tooltip } from "@chakra-ui/react";
 import { format } from "date-fns";
+import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 
+import mutations from "../../api/mutations";
 import { Question } from "../../models/Question";
 
 function SingleQuestion(props: Question) {
-  const { content, dateOfCreation, dislikes, id, likes, user } = props;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { content, dateOfCreation, dislikes, id, likes, user, userId } = props;
 
   function convertDate(date?: string) {
     if (date) {
@@ -12,6 +17,36 @@ function SingleQuestion(props: Question) {
       let value = format(dateParse, "dd.MM.yyyy");
       return value;
     }
+  }
+
+  const likeQuestionMutation = useMutation(
+    () => mutations.likeQuestion(id, likes + 1),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("questions-list");
+      },
+    }
+  );
+
+  const dislikeQuestionMutation = useMutation(
+    () => mutations.dislikeQuestion(id, dislikes + 1),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("questions-list");
+      },
+    }
+  );
+
+  function likeQuestion() {
+    likeQuestionMutation.mutate();
+  }
+
+  function dislikeQuestion() {
+    dislikeQuestionMutation.mutate();
+  }
+
+  function navigateToDetails() {
+    navigate(`/questions/${id}`);
   }
   return (
     <Center>
@@ -24,11 +59,18 @@ function SingleQuestion(props: Question) {
       >
         <Box fontSize={"0.85rem"}>{convertDate(dateOfCreation)}</Box>
         <Box fontSize={"0.85rem"} mb={"0.5rem"}>
-          {user?.firstName} {user?.lastName}
+          {user?.firstName} {user.lastName}
         </Box>
-        <Box fontSize={"1.5rem"} mb={"0.5rem"}>
-          {content}
-        </Box>
+        <Tooltip label={"Click here to see details."}>
+          <Box
+            fontSize={"1.5rem"}
+            mb={"0.5rem"}
+            cursor={"pointer"}
+            onClick={navigateToDetails}
+          >
+            {content}
+          </Box>
+        </Tooltip>
         <Flex
           justifyContent={"space-between"}
           fontSize={"0.85rem"}
@@ -38,10 +80,10 @@ function SingleQuestion(props: Question) {
           <Box>{dislikes} dislikes</Box>
         </Flex>
         <Flex justifyContent={"space-between"} fontSize={"0.85rem"}>
-          <Button colorScheme="teal" size="xs">
+          <Button colorScheme="teal" size="xs" onClick={likeQuestion}>
             Like
           </Button>
-          <Button colorScheme="teal" size="xs">
+          <Button colorScheme="teal" size="xs" onClick={dislikeQuestion}>
             Dislike
           </Button>
         </Flex>

@@ -1,11 +1,12 @@
 import Login from "../components/Login";
+import QuestionDetails from "../components/question/QuestionDetails";
 import QuestionsList from "../components/question/QuestionsList";
 import Register from "../components/Register";
 
 const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
     {
-        path: "/",
-        element: QuestionsList,
+        path: "/questions/:id",
+        element: QuestionDetails,
     },
 ];
 
@@ -19,8 +20,12 @@ const LOGGED_OUT_NO_LAYOUT_ROUTES = [
         element: Login,
     },
     {
-        path: "/home",
+        path: "/questions",
         element: QuestionsList,
+    },
+    {
+        path: "/questions/:id",
+        element: QuestionDetails,
     },
 ];
 

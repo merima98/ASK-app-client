@@ -31,6 +31,7 @@ function QuestionsList() {
             id={question.id}
             likes={question.likes}
             user={question.user}
+            userId={question.userId}
           />
         );
       })}
