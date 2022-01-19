@@ -10,11 +10,16 @@ import SingleQuestion from "./SingleQuestion";
 function QuestionsList() {
   const location = useLocation();
 
-  const { data } = useQuery("questions-list", () =>
-    location.pathname === "/questions"
-      ? queries.questions()
-      : queries.getHotQuestions()
-  );
+  function detectLocation() {
+    if (location.pathname === "/questions" || location.pathname === "/") {
+      return queries.questions();
+    }
+    if (location.pathname === "/hot-questions") {
+      return queries.getHotQuestions();
+    }
+  }
+
+  const { data } = useQuery("questions-list", () => detectLocation());
   const questions = data ? data?.data : [];
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
 

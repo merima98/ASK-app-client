@@ -21,11 +21,17 @@ function getAnswerById(answerId: number) {
 function getHotQuestions() {
     return axios.get(`/questions?_expand=user&_sort=likes&_order=desc`);
 }
+
+function paginatedQuestions(pageSize: number) {
+    return axios.get(`/questions?_expand=user&_sort=dateOfCreation&_order=desc&_limit=${pageSize}`);
+}
+
 const exports = {
     questions,
     getQuestionById,
     getAnswersByQuestionById,
     getAnswerById,
-    getHotQuestions
+    getHotQuestions,
+    paginatedQuestions
 };
 export default exports;

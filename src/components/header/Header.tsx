@@ -29,7 +29,7 @@ function Header() {
         {isLoggedIn && (
           <Breadcrumb spacing="8px" separator={""} p={2}>
             <BreadcrumbItem>
-              <Link to="/home">Home</Link>
+              <Link to="/new-questions">Home</Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
               <Link to="/">Questions</Link>
@@ -50,7 +50,7 @@ function Header() {
         {!isLoggedIn && (
           <Breadcrumb spacing="8px" separator={""} p={2}>
             <BreadcrumbItem>
-              <Link to="/home">Home</Link>
+              <Link to="/new-questions">Home</Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
               <Link to="/questions">Questions</Link>

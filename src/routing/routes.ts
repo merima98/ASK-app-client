@@ -20,7 +20,7 @@ const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
         element: AnswerDetails,
     },
     {
-        path: "/home",
+        path: "/new-questions",
         element: Home,
     },
     {
@@ -52,7 +52,7 @@ const LOGGED_OUT_NO_LAYOUT_ROUTES = [
         element: AnswerDetails,
     },
     {
-        path: "/home",
+        path: "/new-questions",
         element: Home,
     },
     {
