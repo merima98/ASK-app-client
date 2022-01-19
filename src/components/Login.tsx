@@ -66,7 +66,7 @@ function Login() {
         <Stack spacing={2}>
           <FormControl isInvalid={errors.email}>
             <InputGroup>
-              <InputLeftElement children={<EmailIcon />} />
+              <InputLeftElement zIndex={1} children={<EmailIcon />} />
               <Input
                 placeholder="Email"
                 type={"email"}
@@ -81,7 +81,7 @@ function Login() {
           </FormControl>
           <FormControl isInvalid={errors.password}>
             <InputGroup>
-              <InputLeftElement children={<LockIcon />} />
+              <InputLeftElement zIndex={1} children={<LockIcon />} />
               <Input
                 placeholder="Password"
                 autoComplete="Passowrd"
@@ -105,7 +105,7 @@ function Login() {
           <Divider />
           <Center>
             <Box>
-              Do not have an account? <Link to="/register">Register</Link>
+              Do not have an account? <Link to="/">Register</Link>
             </Box>
           </Center>
         </Stack>

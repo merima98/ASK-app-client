@@ -2,6 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
+import MenuHeader from "./components/header/MenuHeader";
 
 import {
   LOGGED_IN_DEFAULT_LAYOUT_ROUTES,
@@ -19,6 +20,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Header />
+          <MenuHeader />
           <Routes>
             {isLoggedIn
               ? LOGGED_IN_DEFAULT_LAYOUT_ROUTES.map((item) => {

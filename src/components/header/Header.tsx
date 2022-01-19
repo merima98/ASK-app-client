@@ -30,6 +30,7 @@ function Header() {
       border="1px"
       borderColor="gray.200"
       mb={3}
+      display={{ base: "none", sm: "block" }}
     >
       <Center>
         {isLoggedIn && (
