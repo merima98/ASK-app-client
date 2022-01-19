@@ -27,6 +27,10 @@ function dislikeQuestion(id: number, dislikes: number) {
     return axios.patch(`/questions/${id}`, { 'dislikes': dislikes });
 }
 
+function updateQuestion(id: number, content: string) {
+    return axios.patch(`/questions/${id}`, { 'content': content });
+}
+
 function addAnswer(answer: {
     content: string;
     likes: number;
@@ -38,6 +42,10 @@ function addAnswer(answer: {
     return axios.post(`/answers`, answer);
 }
 
+function deleteQuestion(id: number) {
+    return axios.delete(`/questions/${id}`);
+}
+
 
 const exports = {
     register,
@@ -45,6 +53,8 @@ const exports = {
     newQuestion,
     likeQuestion,
     dislikeQuestion,
-    addAnswer
+    updateQuestion,
+    addAnswer,
+    deleteQuestion
 };
 export default exports;

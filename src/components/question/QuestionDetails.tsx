@@ -1,22 +1,55 @@
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { toInteger } from "lodash";
 import { format } from "date-fns";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Textarea,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { FieldValues, useForm } from "react-hook-form";
+import { useRef, useState } from "react";
 
-import queries from "../../api/queries";
-import { Box, Button, Center, Container, Flex } from "@chakra-ui/react";
-import { Question } from "../../models/Question";
-import NewAnswer from "../answer/NewAnswer";
 import { Answer } from "../../models/Answer";
+import mutations from "../../api/mutations";
+import queries from "../../api/queries";
+import { Question } from "../../models/Question";
 import SingleAnswer from "../answer/SingleAnswer";
+import NewAnswer from "../answer/NewAnswer";
 
 function QuestionDetails() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
   const params = useParams();
 
+  const queryClient = useQueryClient();
+  const [newContent, setContent] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useQuery("question", () =>
     queries.getQuestionById(toInteger(params.id))
   );
-
   const question: Question = data?.data;
 
   function convertDate(date?: string) {
@@ -27,6 +60,37 @@ function QuestionDetails() {
     }
   }
 
+  const updateQuestionMutation = useMutation(
+    () => mutations.updateQuestion(question.id, newContent),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("question");
+        onClose();
+      },
+    }
+  );
+
+  function onSubmit(values: FieldValues) {
+    setContent(values.content);
+    updateQuestionMutation.mutate();
+  }
+
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const onCloseAlert = () => setIsOpenAlert(false);
+  const cancelRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
+
+  const deleteQuestionMutation = useMutation(mutations.deleteQuestion, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("questions-list");
+      navigate("/");
+    },
+  });
+
+  const deleteQuestion = () => {
+    deleteQuestionMutation.mutate(question.id);
+    setIsOpenAlert(false);
+  };
   return (
     <Container
       rounded={"20px"}
@@ -52,12 +116,77 @@ function QuestionDetails() {
           </Box>
           <Box mb={"0.5rem"}>{question?.content}</Box>
           <Flex justifyContent={"space-between"}>
-            <Button colorScheme="teal" size="xs">
+            <Button colorScheme="blue" size="xs" onClick={onOpen}>
               Edit
             </Button>
-            <Button colorScheme="red" size="xs">
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <ModalContent>
+                  <ModalHeader>Update question</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody pb={3}>
+                    <FormControl isInvalid={errors.content}>
+                      <Textarea
+                        placeholder="Update question"
+                        defaultValue={question?.content}
+                        type={"text"}
+                        {...register("content", {
+                          required: "Question is required field!",
+                        })}
+                      />
+                      <FormErrorMessage mb={1}>
+                        {errors.content && errors.content.message}
+                      </FormErrorMessage>
+                    </FormControl>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button type="submit" colorScheme="green" size="xs" mr={1}>
+                      Save
+                    </Button>
+                    <Button size="xs" onClick={onClose}>
+                      Discard changes
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </form>
+            </Modal>
+            <Button
+              colorScheme="red"
+              size="xs"
+              onClick={() => setIsOpenAlert(true)}
+            >
               Delete
             </Button>
+            <AlertDialog
+              isOpen={isOpenAlert}
+              onClose={onCloseAlert}
+              leastDestructiveRef={cancelRef}
+            >
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Delete question
+                  </AlertDialogHeader>
+                  <AlertDialogBody>
+                    Are you sure you want to delete a question?
+                  </AlertDialogBody>
+                  <AlertDialogFooter>
+                    <Button ref={cancelRef} size="xs" onClick={onCloseAlert}>
+                      Cancel
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      size="xs"
+                      onClick={deleteQuestion}
+                      ml={2}
+                    >
+                      Delete
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
           </Flex>
         </Flex>
         <Flex w={"100%"}>
