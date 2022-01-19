@@ -13,9 +13,15 @@ function getAnswersByQuestionById(questionId: number) {
     const response = axios.get(`/answers?questionId=${questionId}&_sort=dateOfCreation&_order=desc`);
     return response;
 }
+
+function getAnswerById(answerId: number) {
+    return axios.get(`/answers/${answerId}?_expand=user`);
+}
+
 const exports = {
     questions,
     getQuestionById,
-    getAnswersByQuestionById
+    getAnswersByQuestionById,
+    getAnswerById
 };
 export default exports;

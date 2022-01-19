@@ -1,12 +1,15 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Tooltip } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import mutations from "../../api/mutations";
 
 import { Answer } from "../../models/Answer";
 
 function SingleAnswer(props: Answer) {
   const { content, dateOfCreation, dislikes, id, likes, user, userId } = props;
+  const navigate = useNavigate();
+
   const queryClient = useQueryClient();
 
   function convertDate(date?: string) {
@@ -42,6 +45,10 @@ function SingleAnswer(props: Answer) {
     dislikeAnswerMutation.mutate();
   }
 
+  function navigateToDetails() {
+    navigate(`/answer/${id}`);
+  }
+
   return (
     <Flex
       flexDirection={"column"}
@@ -53,9 +60,16 @@ function SingleAnswer(props: Answer) {
       <Box fontSize={"0.85rem"} mb={"0.5rem"}>
         {user?.firstName} {user?.lastName}
       </Box>
-      <Box fontSize={"1rem"} mb={"0.5rem"}>
-        {content}
-      </Box>
+      <Tooltip label={"Click here to see details."}>
+        <Box
+          fontSize={"1rem"}
+          mb={"0.5rem"}
+          onClick={navigateToDetails}
+          cursor={"pointer"}
+        >
+          {content}
+        </Box>
+      </Tooltip>
       <Flex justifyContent={"space-between"} fontSize={"0.85rem"} mb={"0.5rem"}>
         <Box>{likes} likes</Box>
         <Box>{dislikes} dislikes</Box>
