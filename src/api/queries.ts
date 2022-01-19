@@ -18,10 +18,14 @@ function getAnswerById(answerId: number) {
     return axios.get(`/answers/${answerId}?_expand=user`);
 }
 
+function getHotQuestions() {
+    return axios.get(`/questions?_expand=user&_sort=likes&_order=desc`);
+}
 const exports = {
     questions,
     getQuestionById,
     getAnswersByQuestionById,
-    getAnswerById
+    getAnswerById,
+    getHotQuestions
 };
 export default exports;

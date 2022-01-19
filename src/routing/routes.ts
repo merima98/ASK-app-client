@@ -1,5 +1,7 @@
 import AnswerDetails from "../components/answer/AnswerDetails";
+import Home from "../components/home/Home";
 import Login from "../components/Login";
+import HotQuestions from "../components/question/HotQuestions";
 import QuestionDetails from "../components/question/QuestionDetails";
 import QuestionsList from "../components/question/QuestionsList";
 import Register from "../components/Register";
@@ -16,6 +18,14 @@ const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
     {
         path: "/answer/:id",
         element: AnswerDetails,
+    },
+    {
+        path: "/home",
+        element: Home,
+    },
+    {
+        path: "/hot-questions",
+        element: HotQuestions,
     },
 ];
 
@@ -40,6 +50,14 @@ const LOGGED_OUT_NO_LAYOUT_ROUTES = [
     {
         path: "/answer/:id",
         element: AnswerDetails,
+    },
+    {
+        path: "/home",
+        element: Home,
+    },
+    {
+        path: "/hot-questions",
+        element: HotQuestions,
     },
 ];
 

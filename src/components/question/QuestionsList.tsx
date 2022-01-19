@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 import queries from "../../api/queries";
 import { Question } from "../../models/Question";
 import { useAuth } from "../../state";
@@ -7,7 +8,13 @@ import NewQuestion from "./NewQuestion";
 import SingleQuestion from "./SingleQuestion";
 
 function QuestionsList() {
-  const { data } = useQuery("questions-list", () => queries.questions());
+  const location = useLocation();
+
+  const { data } = useQuery("questions-list", () =>
+    location.pathname === "/questions"
+      ? queries.questions()
+      : queries.getHotQuestions()
+  );
   const questions = data ? data?.data : [];
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
 

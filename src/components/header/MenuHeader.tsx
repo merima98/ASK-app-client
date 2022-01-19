@@ -30,7 +30,7 @@ function MenuHeader() {
         {isLoggedIn && (
           <MenuList zIndex={2}>
             <MenuItem fontSize={12}>
-              <Link to="/">Home</Link>
+              <Link to="/home">Home</Link>
             </MenuItem>
             <MenuItem fontSize={12}>
               <Link to="/">Questions</Link>
@@ -50,6 +50,9 @@ function MenuHeader() {
         )}
         {!isLoggedIn && (
           <MenuList zIndex={2}>
+            <MenuItem fontSize={12}>
+              <Link to="/home">Home</Link>
+            </MenuItem>
             <MenuItem fontSize={12}>
               <Link to="/questions">Questions</Link>
             </MenuItem>
