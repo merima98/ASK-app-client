@@ -23,7 +23,7 @@ function NewAnswer(props: { questionId: number }) {
 
   const newAnswerMutation = useMutation(mutations.addAnswer, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries("question");
+      queryClient.invalidateQueries("answers-list");
       toast({
         title: `Answer added!`,
         position: "top",

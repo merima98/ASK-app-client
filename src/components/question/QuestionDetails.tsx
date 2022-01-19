@@ -29,12 +29,11 @@ import {
 import { FieldValues, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
 
-import { Answer } from "../../models/Answer";
 import mutations from "../../api/mutations";
 import queries from "../../api/queries";
 import { Question } from "../../models/Question";
-import SingleAnswer from "../answer/SingleAnswer";
 import NewAnswer from "../answer/NewAnswer";
+import AnswersList from "../answer/AnswersList";
 
 function QuestionDetails() {
   const {
@@ -192,23 +191,7 @@ function QuestionDetails() {
         <Flex w={"100%"}>
           <NewAnswer questionId={question?.id} />
         </Flex>
-        <Flex flexDirection={"column"} width={"100%"}>
-          {question?.answers?.map((answer: Answer) => {
-            return (
-              <SingleAnswer
-                key={answer.id}
-                content={answer.content}
-                dateOfCreation={answer.dateOfCreation}
-                dislikes={answer.dislikes}
-                id={answer.id}
-                likes={answer.likes}
-                questionId={answer.questionId}
-                userId={answer.userId}
-                user={answer.user}
-              />
-            );
-          })}
-        </Flex>
+        <AnswersList />
       </Center>
     </Container>
   );
