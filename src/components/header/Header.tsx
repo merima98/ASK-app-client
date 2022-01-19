@@ -4,24 +4,17 @@ import {
   Center,
   Container,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../state";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
-  const location = useLocation();
-  const [nameOfLink, setNameOfLink] = useState("");
 
   function logout() {
     setIsLoggedIn(false, "");
     window.localStorage.clear();
   }
-
-  useEffect(() => {
-    setNameOfLink(location.pathname);
-  }, [location.pathname]);
 
   return (
     <Container
@@ -60,10 +53,10 @@ function Header() {
               <Link to="/questions">Questions</Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              {(nameOfLink === "/login" || nameOfLink === "/questions") && (
-                <Link to="/">Register</Link>
-              )}
-              {nameOfLink === "/" && <Link to="/login">Login</Link>}
+              <Link to="/login">Login</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link to="/">Register</Link>
             </BreadcrumbItem>
           </Breadcrumb>
         )}

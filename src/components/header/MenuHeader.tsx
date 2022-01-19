@@ -1,93 +1,68 @@
-import { HamburgerIcon } from "@chakra-ui/icons";
-import {
-  IconButton,
-  Text,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Wrap,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Box, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../state";
 
 function MenuHeader() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
-  const location = useLocation();
-  const [nameOfLink, setNameOfLink] = useState("");
 
   function logout() {
     setIsLoggedIn(false, "");
     window.localStorage.clear();
   }
 
-  useEffect(() => {
-    setNameOfLink(location.pathname);
-  }, [location.pathname]);
-
   return (
-    <Wrap display={{ base: "block", sm: "none" }} mb={3}>
+    <Box display={{ base: "block", sm: "none" }}>
       <Menu>
         <MenuButton
-          as={IconButton}
-          icon={<HamburgerIcon />}
-          variant="outline"
-        />
+          px={4}
+          py={2}
+          mb={2}
+          transition="all 0.2s"
+          fontSize={12}
+          borderRadius="md"
+          borderWidth="1px"
+          _hover={{ bg: "gray.100" }}
+        >
+          ASK <ChevronDownIcon />
+        </MenuButton>
         {isLoggedIn && (
-          <MenuList maxW={"10px"} zIndex={2}>
-            <MenuItem>
-              <Link to="/">
-                <Text fontSize={12}>Home</Text>
-              </Link>
+          <MenuList zIndex={2}>
+            <MenuItem fontSize={12}>
+              <Link to="/">Home</Link>
             </MenuItem>
-            <MenuItem>
-              <Link to="/">
-                <Text fontSize={12}>Questions</Text>
-              </Link>
+            <MenuItem fontSize={12}>
+              <Link to="/">Questions</Link>
             </MenuItem>
-            <MenuItem>
-              <Link to="/">
-                <Text fontSize={12}>My questions</Text>
-              </Link>
+            <MenuItem fontSize={12}>
+              <Link to="/">My questions</Link>
             </MenuItem>
-            <MenuItem>
-              <Link to="/">
-                <Text fontSize={12}>Profile</Text>
-              </Link>
+            <MenuItem fontSize={12}>
+              <Link to="/">Profile</Link>
             </MenuItem>
-            <MenuItem>
+            <MenuItem fontSize={12}>
               <Link to="/" onClick={logout}>
-                <Text fontSize={12}>Logout</Text>
+                Logout
               </Link>
             </MenuItem>
           </MenuList>
         )}
         {!isLoggedIn && (
-          <MenuList maxW={"10px"} zIndex={2}>
-            <MenuItem>
-              <Link to="/questions">
-                <Text fontSize={12}>Questions</Text>
-              </Link>
+          <MenuList zIndex={2}>
+            <MenuItem fontSize={12}>
+              <Link to="/questions">Questions</Link>
             </MenuItem>
-            <MenuItem>
-              {(nameOfLink === "/login" || nameOfLink === "/questions") && (
-                <Link to="/">
-                  <Text fontSize={12}>Register</Text>
-                </Link>
-              )}
-
-              {nameOfLink === "/" && (
-                <Link to="/login">
-                  <Text fontSize={12}>Login</Text>
-                </Link>
-              )}
+            <MenuItem fontSize={12}>
+              <Link to="/login">Login</Link>
+            </MenuItem>
+            <MenuItem fontSize={12}>
+              <Link to="/">Register</Link>
             </MenuItem>
           </MenuList>
         )}
       </Menu>
-    </Wrap>
+    </Box>
   );
 }
 export default MenuHeader;

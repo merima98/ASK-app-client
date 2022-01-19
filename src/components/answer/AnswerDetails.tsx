@@ -32,6 +32,7 @@ import { useRef, useState } from "react";
 import mutations from "../../api/mutations";
 import queries from "../../api/queries";
 import { Answer } from "../../models/Answer";
+import { useAuth } from "../../state";
 
 function AnswerDetails() {
   const {
@@ -40,6 +41,8 @@ function AnswerDetails() {
     formState: { errors },
   } = useForm();
   const params = useParams();
+  const isLoggedIn = useAuth((state) => state.isLoggedIn);
+  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
   const queryClient = useQueryClient();
   const [newContent, setContent] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -103,79 +106,86 @@ function AnswerDetails() {
             {answer?.user.firstName} {answer?.user.lastName}
           </Box>
           <Box mb={"0.5rem"}>{answer?.content}</Box>
-          <Flex justifyContent={"space-between"}>
-            <Button colorScheme="blue" size="xs" onClick={onOpen}>
-              Edit
-            </Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <ModalContent>
-                  <ModalHeader>Update answer</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody pb={3}>
-                    <FormControl isInvalid={errors.content}>
-                      <Textarea
-                        placeholder="Update answer"
-                        defaultValue={answer?.content}
-                        type={"text"}
-                        {...register("content", {
-                          required: "Answer is required field!",
-                        })}
-                      />
-                      <FormErrorMessage mb={1}>
-                        {errors.content && errors.content.message}
-                      </FormErrorMessage>
-                    </FormControl>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button type="submit" colorScheme="green" size="xs" mr={1}>
-                      Save
-                    </Button>
-                    <Button size="xs" onClick={onClose}>
-                      Discard changes
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </form>
-            </Modal>
-            <Button
-              colorScheme="red"
-              size="xs"
-              onClick={() => setIsOpenAlert(true)}
-            >
-              Delete
-            </Button>
-            <AlertDialog
-              isOpen={isOpenAlert}
-              onClose={onCloseAlert}
-              leastDestructiveRef={cancelRef}
-            >
-              <AlertDialogOverlay>
-                <AlertDialogContent>
-                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Delete answer
-                  </AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to delete a answer?
-                  </AlertDialogBody>
-                  <AlertDialogFooter>
-                    <Button ref={cancelRef} size="xs" onClick={onCloseAlert}>
-                      Cancel
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      size="xs"
-                      onClick={deleteAnswer}
-                      ml={2}
-                    >
-                      Delete
-                    </Button>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialogOverlay>
-            </AlertDialog>
-          </Flex>
+          {isLoggedIn && answer?.userId === loggedUserId && (
+            <Flex justifyContent={"space-between"}>
+              <Button colorScheme="blue" size="xs" onClick={onOpen}>
+                Edit
+              </Button>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <ModalContent>
+                    <ModalHeader>Update answer</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody pb={3}>
+                      <FormControl isInvalid={errors.content}>
+                        <Textarea
+                          placeholder="Update answer"
+                          defaultValue={answer?.content}
+                          type={"text"}
+                          {...register("content", {
+                            required: "Answer is required field!",
+                          })}
+                        />
+                        <FormErrorMessage mb={1}>
+                          {errors.content && errors.content.message}
+                        </FormErrorMessage>
+                      </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="submit"
+                        colorScheme="green"
+                        size="xs"
+                        mr={1}
+                      >
+                        Save
+                      </Button>
+                      <Button size="xs" onClick={onClose}>
+                        Discard changes
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </form>
+              </Modal>
+              <Button
+                colorScheme="red"
+                size="xs"
+                onClick={() => setIsOpenAlert(true)}
+              >
+                Delete
+              </Button>
+              <AlertDialog
+                isOpen={isOpenAlert}
+                onClose={onCloseAlert}
+                leastDestructiveRef={cancelRef}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Delete answer
+                    </AlertDialogHeader>
+                    <AlertDialogBody>
+                      Are you sure you want to delete a answer?
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} size="xs" onClick={onCloseAlert}>
+                        Cancel
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        size="xs"
+                        onClick={deleteAnswer}
+                        ml={2}
+                      >
+                        Delete
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+            </Flex>
+          )}
         </Flex>
       </Center>
     </Container>

@@ -34,6 +34,7 @@ import queries from "../../api/queries";
 import { Question } from "../../models/Question";
 import NewAnswer from "../answer/NewAnswer";
 import AnswersList from "../answer/AnswersList";
+import { useAuth } from "../../state";
 
 function QuestionDetails() {
   const {
@@ -42,7 +43,8 @@ function QuestionDetails() {
     formState: { errors },
   } = useForm();
   const params = useParams();
-
+  const isLoggedIn = useAuth((state) => state.isLoggedIn);
+  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
   const queryClient = useQueryClient();
   const [newContent, setContent] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -114,83 +116,93 @@ function QuestionDetails() {
             {question?.user.firstName} {question?.user.lastName}
           </Box>
           <Box mb={"0.5rem"}>{question?.content}</Box>
-          <Flex justifyContent={"space-between"}>
-            <Button colorScheme="blue" size="xs" onClick={onOpen}>
-              Edit
-            </Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <ModalContent>
-                  <ModalHeader>Update question</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody pb={3}>
-                    <FormControl isInvalid={errors.content}>
-                      <Textarea
-                        placeholder="Update question"
-                        defaultValue={question?.content}
-                        type={"text"}
-                        {...register("content", {
-                          required: "Question is required field!",
-                        })}
-                      />
-                      <FormErrorMessage mb={1}>
-                        {errors.content && errors.content.message}
-                      </FormErrorMessage>
-                    </FormControl>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button type="submit" colorScheme="green" size="xs" mr={1}>
-                      Save
-                    </Button>
-                    <Button size="xs" onClick={onClose}>
-                      Discard changes
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </form>
-            </Modal>
-            <Button
-              colorScheme="red"
-              size="xs"
-              onClick={() => setIsOpenAlert(true)}
-            >
-              Delete
-            </Button>
-            <AlertDialog
-              isOpen={isOpenAlert}
-              onClose={onCloseAlert}
-              leastDestructiveRef={cancelRef}
-            >
-              <AlertDialogOverlay>
-                <AlertDialogContent>
-                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Delete question
-                  </AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to delete a question?
-                  </AlertDialogBody>
-                  <AlertDialogFooter>
-                    <Button ref={cancelRef} size="xs" onClick={onCloseAlert}>
-                      Cancel
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      size="xs"
-                      onClick={deleteQuestion}
-                      ml={2}
-                    >
-                      Delete
-                    </Button>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialogOverlay>
-            </AlertDialog>
+
+          {isLoggedIn && question?.userId === loggedUserId && (
+            <Flex justifyContent={"space-between"}>
+              <Button colorScheme="blue" size="xs" onClick={onOpen}>
+                Edit
+              </Button>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <ModalContent>
+                    <ModalHeader>Update question</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody pb={3}>
+                      <FormControl isInvalid={errors.content}>
+                        <Textarea
+                          placeholder="Update question"
+                          defaultValue={question?.content}
+                          type={"text"}
+                          {...register("content", {
+                            required: "Question is required field!",
+                          })}
+                        />
+                        <FormErrorMessage mb={1}>
+                          {errors.content && errors.content.message}
+                        </FormErrorMessage>
+                      </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="submit"
+                        colorScheme="green"
+                        size="xs"
+                        mr={1}
+                      >
+                        Save
+                      </Button>
+                      <Button size="xs" onClick={onClose}>
+                        Discard changes
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </form>
+              </Modal>
+              <Button
+                colorScheme="red"
+                size="xs"
+                onClick={() => setIsOpenAlert(true)}
+              >
+                Delete
+              </Button>
+              <AlertDialog
+                isOpen={isOpenAlert}
+                onClose={onCloseAlert}
+                leastDestructiveRef={cancelRef}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Delete question
+                    </AlertDialogHeader>
+                    <AlertDialogBody>
+                      Are you sure you want to delete a question?
+                    </AlertDialogBody>
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} size="xs" onClick={onCloseAlert}>
+                        Cancel
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        size="xs"
+                        onClick={deleteQuestion}
+                        ml={2}
+                      >
+                        Delete
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+            </Flex>
+          )}
+        </Flex>
+        {isLoggedIn && (
+          <Flex w={"100%"}>
+            <NewAnswer questionId={question?.id} />
           </Flex>
-        </Flex>
-        <Flex w={"100%"}>
-          <NewAnswer questionId={question?.id} />
-        </Flex>
+        )}
         <AnswersList />
       </Center>
     </Container>

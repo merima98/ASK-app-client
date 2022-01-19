@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { toInteger } from "lodash";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -17,6 +17,11 @@ function AnswersList() {
 
   return (
     <Flex flexDirection={"column"} width={"100%"}>
+      {answers?.length > 0 && (
+        <Text p={2} fontSize={12} fontWeight={"bold"}>
+          Answers
+        </Text>
+      )}
       {answers?.map((answer: Answer) => {
         return (
           <SingleAnswer

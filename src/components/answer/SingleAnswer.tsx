@@ -5,9 +5,12 @@ import { useNavigate } from "react-router-dom";
 import mutations from "../../api/mutations";
 
 import { Answer } from "../../models/Answer";
+import { useAuth } from "../../state";
 
 function SingleAnswer(props: Answer) {
   const { content, dateOfCreation, dislikes, id, likes, user, userId } = props;
+  const isLoggedIn = useAuth((state) => state.isLoggedIn);
+
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
@@ -74,14 +77,16 @@ function SingleAnswer(props: Answer) {
         <Box>{likes} likes</Box>
         <Box>{dislikes} dislikes</Box>
       </Flex>
-      <Flex justifyContent={"space-between"} fontSize={"0.85rem"}>
-        <Button colorScheme="teal" size="xs" onClick={likeAnswer}>
-          Like
-        </Button>
-        <Button colorScheme="teal" size="xs" onClick={dislikeAnswer}>
-          Dislike
-        </Button>
-      </Flex>
+      {isLoggedIn && (
+        <Flex justifyContent={"space-between"} fontSize={"0.85rem"}>
+          <Button colorScheme="teal" size="xs" onClick={likeAnswer}>
+            Like
+          </Button>
+          <Button colorScheme="teal" size="xs" onClick={dislikeAnswer}>
+            Dislike
+          </Button>
+        </Flex>
+      )}
     </Flex>
   );
 }
