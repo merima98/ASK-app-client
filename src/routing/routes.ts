@@ -5,6 +5,7 @@ import HotQuestions from "../components/question/HotQuestions";
 import QuestionDetails from "../components/question/QuestionDetails";
 import QuestionsList from "../components/question/QuestionsList";
 import Register from "../components/Register";
+import UserDetails from "../components/user/UserDetails";
 
 const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
     {
@@ -30,6 +31,10 @@ const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
     {
         path: "/my-questions",
         element: Home,
+    },
+    {
+        path: "/user/:id",
+        element: UserDetails,
     },
 ];
 

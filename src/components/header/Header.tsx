@@ -3,13 +3,22 @@ import {
   BreadcrumbItem,
   Center,
   Container,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Text,
+  MenuList,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { toInteger } from "lodash";
+
 import { useAuth } from "../../state";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
+  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
 
   function logout() {
     setIsLoggedIn(false, "");
@@ -38,7 +47,18 @@ function Header() {
               <Link to="/my-questions">My questions</Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              <Link to="/">Profile</Link>
+              <Menu>
+                <MenuButton transition="all 0.2s" _hover={{ bg: "gray.100" }}>
+                  Profile <ChevronDownIcon />
+                </MenuButton>
+                <MenuList zIndex={2}>
+                  <MenuItem fontSize={12} cursor={"default"}>
+                    <Link to={`/user/${loggedUserId}`}>
+                      <Text>Your profile</Text>
+                    </Link>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </BreadcrumbItem>
             <BreadcrumbItem>
               <Link to="/" onClick={logout}>

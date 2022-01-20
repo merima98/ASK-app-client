@@ -1,11 +1,14 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Box, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { toInteger } from "lodash";
 import { Link } from "react-router-dom";
+
 import { useAuth } from "../../state";
 
 function MenuHeader() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
+  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
 
   function logout() {
     setIsLoggedIn(false, "");
@@ -39,7 +42,7 @@ function MenuHeader() {
               <Link to="/my-questions">My questions</Link>
             </MenuItem>
             <MenuItem fontSize={12}>
-              <Link to="/">Profile</Link>
+              <Link to={`/user/${loggedUserId}`}>Profile</Link>
             </MenuItem>
             <MenuItem fontSize={12}>
               <Link to="/" onClick={logout}>

@@ -30,6 +30,11 @@ function getUserQuestions(pageSize: number, userId: number) {
     return axios.get(`/questions?userId=${userId}&_expand=user&_sort=dateOfCreation&_order=desc&_limit=${pageSize}`);
 }
 
+
+function getUserById(userId: number) {
+    return axios.get(`/users/${userId}`);
+}
+
 const exports = {
     questions,
     getQuestionById,
@@ -37,6 +42,7 @@ const exports = {
     getAnswerById,
     getHotQuestions,
     paginatedQuestions,
-    getUserQuestions
+    getUserQuestions,
+    getUserById
 };
 export default exports;
