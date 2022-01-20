@@ -26,12 +26,17 @@ function paginatedQuestions(pageSize: number) {
     return axios.get(`/questions?_expand=user&_sort=dateOfCreation&_order=desc&_limit=${pageSize}`);
 }
 
+function getUserQuestions(pageSize: number, userId: number) {
+    return axios.get(`/questions?userId=${userId}&_expand=user&_sort=dateOfCreation&_order=desc&_limit=${pageSize}`);
+}
+
 const exports = {
     questions,
     getQuestionById,
     getAnswersByQuestionById,
     getAnswerById,
     getHotQuestions,
-    paginatedQuestions
+    paginatedQuestions,
+    getUserQuestions
 };
 export default exports;

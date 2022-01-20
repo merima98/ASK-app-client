@@ -27,6 +27,10 @@ const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
         path: "/hot-questions",
         element: HotQuestions,
     },
+    {
+        path: "/my-questions",
+        element: Home,
+    },
 ];
 
 const LOGGED_OUT_NO_LAYOUT_ROUTES = [
@@ -59,6 +63,7 @@ const LOGGED_OUT_NO_LAYOUT_ROUTES = [
         path: "/hot-questions",
         element: HotQuestions,
     },
+
 ];
 
 export { LOGGED_OUT_NO_LAYOUT_ROUTES, LOGGED_IN_DEFAULT_LAYOUT_ROUTES };

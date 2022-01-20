@@ -35,7 +35,7 @@ function Header() {
               <Link to="/">Questions</Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              <Link to="/">My questions</Link>
+              <Link to="/my-questions">My questions</Link>
             </BreadcrumbItem>
             <BreadcrumbItem>
               <Link to="/">Profile</Link>

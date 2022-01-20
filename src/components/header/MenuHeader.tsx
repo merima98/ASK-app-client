@@ -36,7 +36,7 @@ function MenuHeader() {
               <Link to="/">Questions</Link>
             </MenuItem>
             <MenuItem fontSize={12}>
-              <Link to="/">My questions</Link>
+              <Link to="/my-questions">My questions</Link>
             </MenuItem>
             <MenuItem fontSize={12}>
               <Link to="/">Profile</Link>

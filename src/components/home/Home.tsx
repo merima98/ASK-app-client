@@ -1,35 +1,42 @@
 import { Box, Button, Center, Container } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import queries from "../../api/queries";
+import { useLocation } from "react-router-dom";
 import { Question } from "../../models/Question";
+import { toInteger } from "lodash";
 import { useAuth } from "../../state";
 import HomeHeader from "../header/HomeHeader";
 import NewQuestion from "../question/NewQuestion";
 import SingleQuestion from "../question/SingleQuestion";
+import { useQuery } from "react-query";
 
 function Home() {
+  const location = useLocation();
   const defaultPageSize = 20;
   const [pageSize, setPageSize] = useState(defaultPageSize);
   const [isButtonVisible, setButtonVisible] = useState(true);
-  const [questions, setQuestions] = useState([]);
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
+  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
 
-  useEffect(() => {
-    async function loadPaginatedQuestions() {
-      let response = await queries.paginatedQuestions(pageSize);
-      setQuestions(response.data);
-      if (!(pageSize <= response.data.length)) {
-        setButtonVisible(false);
-      }
-      setPageSize(pageSize);
-    }
-    loadPaginatedQuestions();
-  }, [pageSize]);
+  const { data } = useQuery(
+    ["paginated-questions", pageSize],
+    () =>
+      location.pathname === "/new-questions"
+        ? queries.paginatedQuestions(pageSize)
+        : queries.getUserQuestions(pageSize, loggedUserId),
+    { keepPreviousData: true }
+  );
+
+  const questions = data?.data;
 
   function loadMoreQuestions() {
-    let newPageSize = pageSize;
-    newPageSize += defaultPageSize;
-    setPageSize(newPageSize);
+    if (pageSize <= questions?.length) {
+      let newPageSize = pageSize;
+      newPageSize += defaultPageSize;
+      setPageSize(newPageSize);
+    } else {
+      setButtonVisible(false);
+    }
   }
 
   return (
@@ -45,7 +52,7 @@ function Home() {
       >
         {isLoggedIn && <NewQuestion />}
         <Box mb={3}>
-          {questions.map((question: Question) => {
+          {questions?.map((question: Question) => {
             return (
               <SingleQuestion
                 key={question.id}
