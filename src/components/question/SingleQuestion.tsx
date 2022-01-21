@@ -103,7 +103,7 @@ function SingleQuestion(props: Question) {
             <Button colorScheme="blue" size="xs" onClick={likeQuestion}>
               Like
             </Button>
-            <Button colorScheme="blue" size="xs" onClick={dislikeQuestion}>
+            <Button colorScheme="red" size="xs" onClick={dislikeQuestion}>
               Dislike
             </Button>
           </Flex>

@@ -83,7 +83,7 @@ function SingleAnswer(props: Answer) {
           <Button colorScheme="blue" size="xs" onClick={likeAnswer}>
             Like
           </Button>
-          <Button colorScheme="blue" size="xs" onClick={dislikeAnswer}>
+          <Button colorScheme="red" size="xs" onClick={dislikeAnswer}>
             Dislike
           </Button>
         </Flex>

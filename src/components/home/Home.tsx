@@ -4,7 +4,6 @@ import queries from "../../api/queries";
 import { useLocation } from "react-router-dom";
 import { Question } from "../../models/Question";
 import { toInteger } from "lodash";
-import HomeHeader from "../header/HomeHeader";
 import SingleQuestion from "../question/SingleQuestion";
 import { useQuery } from "react-query";
 
@@ -38,7 +37,6 @@ function Home() {
 
   return (
     <Container>
-      <HomeHeader />
       <Container p={10}>
         <Box mb={3}>
           {questions?.map((question: Question) => {
