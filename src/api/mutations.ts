@@ -1,4 +1,5 @@
 import { FormControlOptions } from "@chakra-ui/react";
+import { FieldValues } from "react-hook-form";
 import axios from "../httpClient";
 
 function register(credentials: FormControlOptions) {
@@ -62,6 +63,18 @@ function updateAnswer(id: number, content: string) {
     return axios.patch(`/answers/${id}`, { 'content': content });
 }
 
+function updateProfileData(userId: number, data: FieldValues) {
+    return axios.patch(`/users/${userId}`, data);
+}
+
+function checkPassword(data: { currentPassword: string; hash: string }) {
+    return axios.post(`/check-password`, data);
+}
+
+function changePassword(data: { userId: number, password: string; email: string }) {
+    return axios.patch(`/users/${data.userId}`, { 'password': data.password, 'email': data.email });
+}
+
 const exports = {
     register,
     login,
@@ -74,6 +87,9 @@ const exports = {
     likeAnswer,
     dislikeAnswer,
     deleteAnswer,
-    updateAnswer
+    updateAnswer,
+    updateProfileData,
+    checkPassword,
+    changePassword
 };
 export default exports;
