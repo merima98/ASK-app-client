@@ -56,7 +56,8 @@ function SingleAnswer(props: Answer) {
     <Flex
       flexDirection={"column"}
       padding={"1rem"}
-      borderBottom={"3px solid"}
+      mb={2}
+      border={"1px solid"}
       borderColor={"gray.200"}
     >
       <Box fontSize={"0.85rem"}>{convertDate(dateOfCreation)}</Box>
@@ -79,10 +80,10 @@ function SingleAnswer(props: Answer) {
       </Flex>
       {isLoggedIn && (
         <Flex justifyContent={"space-between"} fontSize={"0.85rem"}>
-          <Button colorScheme="teal" size="xs" onClick={likeAnswer}>
+          <Button colorScheme="blue" size="xs" onClick={likeAnswer}>
             Like
           </Button>
-          <Button colorScheme="teal" size="xs" onClick={dislikeAnswer}>
+          <Button colorScheme="blue" size="xs" onClick={dislikeAnswer}>
             Dislike
           </Button>
         </Flex>

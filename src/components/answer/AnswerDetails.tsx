@@ -91,14 +91,7 @@ function AnswerDetails() {
     setIsOpenAlert(false);
   };
   return (
-    <Container
-      rounded={"20px"}
-      overflow={"hidden"}
-      border={"3px solid"}
-      backgroundColor={"gray.50"}
-      borderColor={"gray.100"}
-      p={"10px"}
-    >
+    <Container border={"1px solid"} borderColor={"gray.200"} p={10}>
       <Center flexDirection={"column"}>
         <Flex flexDirection={"column"} w={"100%"} padding={"1rem"}>
           <Box fontSize={"0.85rem"}>{convertDate(answer?.dateOfCreation)}</Box>

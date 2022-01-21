@@ -2,6 +2,7 @@ import { Container } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import queries from "../../api/queries";
 import { User } from "../../models/User";
+import HomeHeader from "../header/HomeHeader";
 import SingleUser from "./SingleUser";
 
 function PopularUsersList() {
@@ -19,8 +20,9 @@ function PopularUsersList() {
 
   return (
     <Container>
+      <HomeHeader />
       {users?.map((user: User) => {
-        return <SingleUser user={user} />;
+        return <SingleUser key={user.id} user={user} />;
       })}
     </Container>
   );

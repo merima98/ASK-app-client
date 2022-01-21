@@ -53,11 +53,12 @@ function SingleQuestion(props: Question) {
   return (
     <Center>
       <Flex
-        w={"50%"}
         flexDirection={"column"}
-        padding={"1rem"}
-        borderBottom={"3px solid"}
+        p={5}
+        border={"1px solid"}
         borderColor={"gray.200"}
+        mb={2}
+        width={"100%"}
       >
         <Box fontSize={"0.85rem"}>{convertDate(dateOfCreation)}</Box>
         <Box fontSize={"0.85rem"} mb={"0.5rem"}>
@@ -84,10 +85,10 @@ function SingleQuestion(props: Question) {
 
         {isLoggedIn && (
           <Flex justifyContent={"space-between"} fontSize={"0.85rem"}>
-            <Button colorScheme="teal" size="xs" onClick={likeQuestion}>
+            <Button colorScheme="blue" size="xs" onClick={likeQuestion}>
               Like
             </Button>
-            <Button colorScheme="teal" size="xs" onClick={dislikeQuestion}>
+            <Button colorScheme="blue" size="xs" onClick={dislikeQuestion}>
               Dislike
             </Button>
           </Flex>

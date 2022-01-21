@@ -4,9 +4,7 @@ import queries from "../../api/queries";
 import { useLocation } from "react-router-dom";
 import { Question } from "../../models/Question";
 import { toInteger } from "lodash";
-import { useAuth } from "../../state";
 import HomeHeader from "../header/HomeHeader";
-import NewQuestion from "../question/NewQuestion";
 import SingleQuestion from "../question/SingleQuestion";
 import { useQuery } from "react-query";
 
@@ -15,7 +13,6 @@ function Home() {
   const defaultPageSize = 20;
   const [pageSize, setPageSize] = useState(defaultPageSize);
   const [isButtonVisible, setButtonVisible] = useState(true);
-  const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const loggedUserId = toInteger(window.localStorage.getItem("userId"));
 
   const { data } = useQuery(
@@ -42,15 +39,7 @@ function Home() {
   return (
     <Container>
       <HomeHeader />
-      <Container
-        rounded={"20px"}
-        overflow={"hidden"}
-        border={"3px solid"}
-        backgroundColor={"gray.50"}
-        borderColor={"gray.100"}
-        p={"10px"}
-      >
-        {isLoggedIn && <NewQuestion />}
+      <Container p={10}>
         <Box mb={3}>
           {questions?.map((question: Question) => {
             return (

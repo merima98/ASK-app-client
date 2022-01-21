@@ -1,6 +1,6 @@
 import {
+  Box,
   Button,
-  Center,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -54,13 +54,8 @@ function NewQuestion() {
   }
 
   return (
-    <Center>
-      <Flex
-        w={"70%"}
-        padding={"1rem"}
-        borderBottom={"3px solid"}
-        borderColor={"gray.200"}
-      >
+    <Flex w={"100%"} mb={2}>
+      <Box width={"100%"}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={errors.content}>
             <Textarea
@@ -76,12 +71,12 @@ function NewQuestion() {
               {errors.content && errors.content.message}
             </FormErrorMessage>
           </FormControl>
-          <Button type="submit" colorScheme="teal" size="xs">
+          <Button type="submit" colorScheme="blue" size="xs">
             Add question
           </Button>
         </form>
-      </Flex>
-    </Center>
+      </Box>
+    </Flex>
   );
 }
 

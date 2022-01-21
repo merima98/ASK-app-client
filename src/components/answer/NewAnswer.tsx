@@ -55,10 +55,11 @@ function NewAnswer(props: { questionId: number }) {
   }
   return (
     <Flex
-      padding={"1rem"}
-      borderBottom={"3px solid"}
-      borderColor={"gray.200"}
+      padding={5}
+      backgroundColor={"gray.50"}
       w={"100%"}
+      border={"1px solid"}
+      borderColor={"gray.200"}
     >
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <FormControl isInvalid={errors.content}>
@@ -75,7 +76,7 @@ function NewAnswer(props: { questionId: number }) {
             {errors.content && errors.content.message}
           </FormErrorMessage>
         </FormControl>
-        <Button type="submit" colorScheme="teal" size="xs">
+        <Button type="submit" colorScheme="blue" size="xs">
           Add answer
         </Button>
       </form>

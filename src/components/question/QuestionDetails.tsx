@@ -93,21 +93,15 @@ function QuestionDetails() {
     setIsOpenAlert(false);
   };
   return (
-    <Container
-      rounded={"20px"}
-      overflow={"hidden"}
-      border={"3px solid"}
-      backgroundColor={"gray.50"}
-      borderColor={"gray.100"}
-      p={"10px"}
-    >
+    <Container p={10}>
       <Center flexDirection={"column"}>
         <Flex
           flexDirection={"column"}
           w={"100%"}
           padding={"1rem"}
-          borderBottom={"3px solid"}
+          border={"1px solid"}
           borderColor={"gray.200"}
+          mb={2}
         >
           <Box fontSize={"0.85rem"}>
             {convertDate(question?.dateOfCreation)}

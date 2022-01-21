@@ -7,7 +7,6 @@ function SingleUser(props: { user: User }) {
       <Flex
         flexDirection={{ base: "column", sm: "row" }}
         justifyContent={"space-between"}
-        borderBottomColor={"red"}
         border={"1px solid"}
         borderColor={"gray.200"}
         mb={2}
