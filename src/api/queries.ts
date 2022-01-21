@@ -35,6 +35,11 @@ function getUserById(userId: number) {
     return axios.get(`/users/${userId}`);
 }
 
+
+function getPopularUsers() {
+    return axios.get(`/users?_embed=answers`);
+}
+
 const exports = {
     questions,
     getQuestionById,
@@ -43,6 +48,7 @@ const exports = {
     getHotQuestions,
     paginatedQuestions,
     getUserQuestions,
-    getUserById
+    getUserById,
+    getPopularUsers
 };
 export default exports;

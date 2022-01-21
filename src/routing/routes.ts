@@ -5,6 +5,7 @@ import HotQuestions from "../components/question/HotQuestions";
 import QuestionDetails from "../components/question/QuestionDetails";
 import QuestionsList from "../components/question/QuestionsList";
 import Register from "../components/Register";
+import PopularUsersList from "../components/user/PopularUsersList";
 import UserDetails from "../components/user/UserDetails";
 
 const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
@@ -35,6 +36,10 @@ const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
     {
         path: "/user/:id",
         element: UserDetails,
+    },
+    {
+        path: "/popular-users",
+        element: PopularUsersList,
     },
 ];
 
@@ -67,6 +72,10 @@ const LOGGED_OUT_NO_LAYOUT_ROUTES = [
     {
         path: "/hot-questions",
         element: HotQuestions,
+    },
+    {
+        path: "/popular-users",
+        element: PopularUsersList,
     },
 
 ];
