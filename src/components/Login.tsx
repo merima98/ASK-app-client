@@ -55,7 +55,7 @@ function Login() {
   }
 
   return (
-    <Container border="1px" borderColor="gray.200" p={10}>
+    <Container border="1px" borderColor="gray.200" p={10} marginTop={20}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <FormControl isInvalid={errors.email}>

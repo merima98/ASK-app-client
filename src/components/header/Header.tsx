@@ -56,13 +56,23 @@ function Header() {
           <Flex flexDirection={"column"}>
             <Flex justifyContent={"center"}>
               <Breadcrumb spacing="8px" separator={""} p={2}>
-                <BreadcrumbItem>
+                <BreadcrumbItem
+                  color={
+                    location.pathname === "/new-questions" ? "blue" : "black"
+                  }
+                >
                   <Link to="/new-questions">Home</Link>
                 </BreadcrumbItem>
-                <BreadcrumbItem>
+                <BreadcrumbItem
+                  color={location.pathname === "/" ? "blue" : "black"}
+                >
                   <Link to="/">Questions</Link>
                 </BreadcrumbItem>
-                <BreadcrumbItem>
+                <BreadcrumbItem
+                  color={
+                    location.pathname === "/my-questions" ? "blue" : "black"
+                  }
+                >
                   <Link to="/my-questions">My questions</Link>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
@@ -89,13 +99,25 @@ function Header() {
             {isHeaderDisplyed && (
               <Flex>
                 <Breadcrumb separator="-">
-                  <BreadcrumbItem>
+                  <BreadcrumbItem
+                    color={
+                      location.pathname === "/new-questions" ? "blue" : "black"
+                    }
+                  >
                     <Link to="/new-questions">New questions</Link>
                   </BreadcrumbItem>
-                  <BreadcrumbItem>
+                  <BreadcrumbItem
+                    color={
+                      location.pathname === "/popular-users" ? "blue" : "black"
+                    }
+                  >
                     <Link to="/popular-users">Popular users</Link>
                   </BreadcrumbItem>
-                  <BreadcrumbItem>
+                  <BreadcrumbItem
+                    color={
+                      location.pathname === "/hot-questions" ? "blue" : "black"
+                    }
+                  >
                     <Link to="/hot-questions">Hot questions</Link>
                   </BreadcrumbItem>
                 </Breadcrumb>
@@ -106,16 +128,26 @@ function Header() {
         {!isLoggedIn && (
           <Flex>
             <Breadcrumb spacing="8px" separator={""} p={2}>
-              <BreadcrumbItem>
+              <BreadcrumbItem
+                color={
+                  location.pathname === "/new-questions" ? "blue" : "black"
+                }
+              >
                 <Link to="/new-questions">Home</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem>
+              <BreadcrumbItem
+                color={location.pathname === "/questions" ? "blue" : "black"}
+              >
                 <Link to="/questions">Questions</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem>
+              <BreadcrumbItem
+                color={location.pathname === "/login" ? "blue" : "black"}
+              >
                 <Link to="/login">Login</Link>
               </BreadcrumbItem>
-              <BreadcrumbItem>
+              <BreadcrumbItem
+                color={location.pathname === "/" ? "blue" : "black"}
+              >
                 <Link to="/">Register</Link>
               </BreadcrumbItem>
             </Breadcrumb>
