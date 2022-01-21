@@ -1,13 +1,28 @@
 import { Box, Button, Center, Flex, Tooltip } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import mutations from "../../api/mutations";
 import { Question } from "../../models/Question";
 import { useAuth } from "../../state";
 
 function SingleQuestion(props: Question) {
+  const location = useLocation();
+
+  function checkQueryName() {
+    if (location.pathname === "/" || location.pathname === "/hot-questions") {
+      return "questions-list";
+    }
+    if (
+      location.pathname === "/new-questions" ||
+      location.pathname === "/my-questions"
+    ) {
+      return "paginated-questions";
+    }
+    return location.pathname;
+  }
+  const queryName = checkQueryName();
   const navigate = useNavigate();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const queryClient = useQueryClient();
@@ -25,7 +40,7 @@ function SingleQuestion(props: Question) {
     () => mutations.likeQuestion(id, likes + 1),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries("questions-list");
+        queryClient.invalidateQueries(queryName);
       },
     }
   );
@@ -34,7 +49,7 @@ function SingleQuestion(props: Question) {
     () => mutations.dislikeQuestion(id, dislikes + 1),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries("questions-list");
+        queryClient.invalidateQueries(queryName);
       },
     }
   );
