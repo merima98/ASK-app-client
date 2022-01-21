@@ -66,7 +66,7 @@ function SingleQuestion(props: Question) {
     navigate(`/questions/${id}`);
   }
   return (
-    <Center>
+    <Center marginTop={10}>
       <Flex
         flexDirection={"column"}
         p={5}

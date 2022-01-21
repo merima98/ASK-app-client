@@ -18,7 +18,7 @@ function PopularUsersList() {
   }
 
   return (
-    <Container>
+    <Container marginTop={20}>
       {users?.map((user: User) => {
         return <SingleUser key={user.id} user={user} />;
       })}

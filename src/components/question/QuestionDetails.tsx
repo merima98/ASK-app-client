@@ -93,7 +93,7 @@ function QuestionDetails() {
     setIsOpenAlert(false);
   };
   return (
-    <Container p={10}>
+    <Container paddingTop={20}>
       <Center flexDirection={"column"}>
         <Flex
           flexDirection={"column"}

@@ -60,7 +60,12 @@ function UserDetails() {
   } = useForm();
 
   return (
-    <Container border={"1px solid"} borderColor={"gray.200"} p={10}>
+    <Container
+      border={"1px solid"}
+      borderColor={"gray.200"}
+      p={10}
+      marginTop={20}
+    >
       <Flex flexDirection={"column"}>
         <Flex justifyContent={"space-between"} mb={2}>
           <Text fontSize={"sm"} fontWeight={"bold"}>

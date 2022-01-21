@@ -45,6 +45,7 @@ function Header() {
       position={"fixed"}
       zIndex={1}
       bg={"white"}
+      top={0}
       border="1px"
       borderColor="gray.200"
       mb={3}
