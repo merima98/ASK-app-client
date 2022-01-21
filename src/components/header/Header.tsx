@@ -10,10 +10,10 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { User } from "react-feather";
 import { toInteger } from "lodash";
 
 import { useAuth } from "../../state";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
@@ -48,8 +48,8 @@ function Header() {
             </BreadcrumbItem>
             <BreadcrumbItem>
               <Menu>
-                <MenuButton transition="all 0.2s" _hover={{ bg: "gray.100" }}>
-                  Profile <ChevronDownIcon />
+                <MenuButton transition="all 0.2s">
+                  <User width={20} height={16} />
                 </MenuButton>
                 <MenuList zIndex={2}>
                   <MenuItem fontSize={12} cursor={"default"}>
@@ -57,13 +57,13 @@ function Header() {
                       <Text>Your profile</Text>
                     </Link>
                   </MenuItem>
+                  <MenuItem fontSize={12} cursor={"default"}>
+                    <Link to="/" onClick={logout}>
+                      Logout
+                    </Link>
+                  </MenuItem>
                 </MenuList>
               </Menu>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <Link to="/" onClick={logout}>
-                Logout
-              </Link>
             </BreadcrumbItem>
           </Breadcrumb>
         )}
