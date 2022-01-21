@@ -60,28 +60,22 @@ function UserDetails() {
   } = useForm();
 
   return (
-    <Container
-      rounded={"20px"}
-      overflow={"hidden"}
-      border={"3px solid"}
-      borderColor={"gray.100"}
-      p={"10px"}
-    >
+    <Container border={"1px solid"} borderColor={"gray.200"} p={10}>
       <Flex flexDirection={"column"}>
         <Flex justifyContent={"space-between"} mb={2}>
-          <Text fontSize={15} fontWeight={"bold"}>
+          <Text fontSize={"sm"} fontWeight={"bold"}>
             First name
           </Text>
           <Text>{data?.data.firstName}</Text>
         </Flex>
         <Flex justifyContent={"space-between"} mb={2}>
-          <Text fontSize={15} fontWeight={"bold"}>
+          <Text fontSize={"sm"} fontWeight={"bold"}>
             First name
           </Text>
           <Text>{data?.data.lastName}</Text>
         </Flex>
         <Flex justifyContent={"space-between"} mb={2}>
-          <Text fontSize={15} fontWeight={"bold"}>
+          <Text fontSize={"sm"} fontWeight={"bold"}>
             Email
           </Text>
           <Text>{data?.data.email}</Text>

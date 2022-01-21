@@ -73,7 +73,7 @@ function UserCurrentPassword(props: { user: User }) {
             <Stack spacing="24px">
               <Box>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <FormControl isInvalid={errors.currentPassword}>
+                  <FormControl isInvalid={errors.currentPassword} mb={2}>
                     <FormLabel>Current password</FormLabel>
                     <Input
                       {...register("currentPassword", {
@@ -91,7 +91,7 @@ function UserCurrentPassword(props: { user: User }) {
                       {errors.currentPassword && errors.currentPassword.message}
                     </FormErrorMessage>
                   </FormControl>
-                  <Button type="submit" colorScheme="teal" size="xs">
+                  <Button type="submit" colorScheme="blue" size="xs">
                     Confirm
                   </Button>
                 </form>

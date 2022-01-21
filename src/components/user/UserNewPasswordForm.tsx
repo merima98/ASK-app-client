@@ -47,7 +47,7 @@ function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={errors.password}>
+        <FormControl isInvalid={errors.password} mb={2}>
           <FormLabel>New password</FormLabel>
           <InputGroup>
             <Input

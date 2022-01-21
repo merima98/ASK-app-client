@@ -159,7 +159,7 @@ function AnswerDetails() {
                       Delete answer
                     </AlertDialogHeader>
                     <AlertDialogBody>
-                      Are you sure you want to delete a answer?
+                      Are you sure you want to delete answer?
                     </AlertDialogBody>
                     <AlertDialogFooter>
                       <Button ref={cancelRef} size="xs" onClick={onCloseAlert}>
