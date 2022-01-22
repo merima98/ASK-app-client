@@ -25,6 +25,7 @@ import {
   ModalOverlay,
   Textarea,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
@@ -75,6 +76,7 @@ function AnswerDetails() {
   }
 
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const toast = useToast();
   const onCloseAlert = () => setIsOpenAlert(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
@@ -83,6 +85,12 @@ function AnswerDetails() {
     onSuccess: (data) => {
       queryClient.invalidateQueries("answers-list");
       navigate(`/questions/${answer.questionId}`);
+      toast({
+        title: `Answer deleted!`,
+        status: "success",
+        position: "top",
+        isClosable: true,
+      });
     },
   });
 
@@ -91,7 +99,7 @@ function AnswerDetails() {
     setIsOpenAlert(false);
   };
   return (
-    <Container border={"1px solid"} borderColor={"gray.200"} p={10}>
+    <Container border={"1px solid"} borderColor={"gray.200"} p={10} mt={20}>
       <Center flexDirection={"column"}>
         <Flex flexDirection={"column"} w={"100%"} padding={"1rem"}>
           <Box fontSize={"0.85rem"}>{convertDate(answer?.dateOfCreation)}</Box>

@@ -50,6 +50,7 @@ function Login() {
       toast({
         title: `Email or password is incorrect!`,
         status: "error",
+        position: "top",
         isClosable: true,
       });
     },

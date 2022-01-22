@@ -25,6 +25,7 @@ import {
   ModalOverlay,
   Textarea,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRef, useState } from "react";
@@ -52,6 +53,7 @@ function QuestionDetails() {
     queries.getQuestionById(toInteger(params.id))
   );
   const question: Question = data?.data;
+  const toast = useToast();
 
   function convertDate(date?: string) {
     if (date) {
@@ -85,6 +87,12 @@ function QuestionDetails() {
     onSuccess: (data) => {
       queryClient.invalidateQueries("questions-list");
       navigate("/");
+      toast({
+        title: `Question deleted!`,
+        status: "success",
+        position: "top",
+        isClosable: true,
+      });
     },
   });
 
