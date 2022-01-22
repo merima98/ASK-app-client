@@ -1,11 +1,12 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Box, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { toInteger } from "lodash";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { useAuth } from "../../state";
 
 function MenuHeader() {
+  const location = useLocation();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
   const loggedUserId = toInteger(window.localStorage.getItem("userId"));
@@ -16,7 +17,7 @@ function MenuHeader() {
   }
 
   return (
-    <Box display={{ base: "block", sm: "none" }}>
+    <Box display={{ base: "block", sm: "none" }} position={"fixed"} top={0}>
       <Menu>
         <MenuButton
           px={4}
@@ -32,13 +33,22 @@ function MenuHeader() {
         </MenuButton>
         {isLoggedIn && (
           <MenuList zIndex={2}>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/new-questions" ? "blue" : "black"}
+            >
               <Link to="/new-questions">Home</Link>
             </MenuItem>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/" ? "blue" : "black"}
+            >
               <Link to="/">Questions</Link>
             </MenuItem>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/my-questions" ? "blue" : "black"}
+            >
               <Link to="/my-questions">My questions</Link>
             </MenuItem>
             <MenuItem fontSize={12}>
@@ -53,16 +63,28 @@ function MenuHeader() {
         )}
         {!isLoggedIn && (
           <MenuList zIndex={2}>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/new-questions" ? "blue" : "black"}
+            >
               <Link to="/new-questions">Home</Link>
             </MenuItem>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/questions" ? "blue" : "black"}
+            >
               <Link to="/questions">Questions</Link>
             </MenuItem>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/login" ? "blue" : "black"}
+            >
               <Link to="/login">Login</Link>
             </MenuItem>
-            <MenuItem fontSize={12}>
+            <MenuItem
+              fontSize={12}
+              color={location.pathname === "/register" ? "blue" : "black"}
+            >
               <Link to="/">Register</Link>
             </MenuItem>
           </MenuList>
