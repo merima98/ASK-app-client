@@ -65,6 +65,7 @@ function Register() {
             <InputGroup>
               <InputLeftElement />
               <Input
+                data-cy="input-firstName"
                 placeholder="First name"
                 type={"info"}
                 {...register("firstName", {
@@ -80,11 +81,11 @@ function Register() {
               {errors.firstName && errors.firstName.message}
             </FormErrorMessage>
           </FormControl>
-
           <FormControl isInvalid={errors.lastName}>
             <InputGroup>
               <InputLeftElement />
               <Input
+                data-cy="input-lastName"
                 placeholder="Last name"
                 type={"info"}
                 {...register("lastName", {
@@ -101,11 +102,11 @@ function Register() {
             </FormErrorMessage>
           </FormControl>
           <Divider />
-
           <FormControl isInvalid={errors.email}>
             <InputGroup>
               <InputLeftElement zIndex={1} children={<EmailIcon />} />
               <Input
+                data-cy="input-email"
                 placeholder="Email"
                 type={"email"}
                 {...register("email", {
@@ -121,6 +122,7 @@ function Register() {
             <InputGroup>
               <InputLeftElement zIndex={1} children={<LockIcon />} />
               <Input
+                data-cy="input-password"
                 placeholder="Password"
                 autoComplete="Passowrd"
                 type={show ? "text" : "password"}
@@ -147,7 +149,12 @@ function Register() {
               {errors.password && errors.password.message}
             </FormErrorMessage>
           </FormControl>
-          <Button type="submit" boxShadow={"sm"} _hover={{ boxShadow: "md" }}>
+          <Button
+            type="submit"
+            boxShadow={"sm"}
+            _hover={{ boxShadow: "md" }}
+            data-cy="register-button"
+          >
             Register
           </Button>
           <Divider />

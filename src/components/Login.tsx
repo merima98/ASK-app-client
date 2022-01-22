@@ -72,6 +72,7 @@ function Login() {
                 children={<EmailIcon color={iconColor} />}
               />
               <Input
+                data-cy="input-email"
                 placeholder="Email"
                 type={"email"}
                 _focus={{ backgroundColor: inputBackgroundColor }}
@@ -91,6 +92,7 @@ function Login() {
                 children={<LockIcon color={iconColor} />}
               />
               <Input
+                data-cy="input-password"
                 _focus={{ backgroundColor: inputBackgroundColor }}
                 placeholder="Password"
                 autoComplete="Passowrd"
@@ -118,7 +120,12 @@ function Login() {
               {errors.password && errors.password.message}
             </FormErrorMessage>
           </FormControl>
-          <Button type="submit" boxShadow={"sm"} _hover={{ boxShadow: "md" }}>
+          <Button
+            type="submit"
+            boxShadow={"sm"}
+            _hover={{ boxShadow: "md" }}
+            data-cy="login-button"
+          >
             Login
           </Button>
           <Divider />
