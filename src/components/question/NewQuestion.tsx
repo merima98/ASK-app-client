@@ -54,7 +54,7 @@ function NewQuestion() {
   }
 
   return (
-    <Flex w={"100%"} mb={2} paddingTop={5}>
+    <Flex w={"100%"} mb={2} paddingTop={5} zIndex={1}>
       <Box width={"100%"}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={errors.content}>

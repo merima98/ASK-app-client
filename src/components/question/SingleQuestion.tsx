@@ -100,10 +100,20 @@ function SingleQuestion(props: Question) {
 
         {isLoggedIn && (
           <Flex justifyContent={"space-between"} fontSize={"0.85rem"}>
-            <Button colorScheme="blue" size="xs" onClick={likeQuestion}>
+            <Button
+              colorScheme="blue"
+              size="xs"
+              onClick={likeQuestion}
+              zIndex={1}
+            >
               Like
             </Button>
-            <Button colorScheme="red" size="xs" onClick={dislikeQuestion}>
+            <Button
+              colorScheme="red"
+              size="xs"
+              onClick={dislikeQuestion}
+              zIndex={1}
+            >
               Dislike
             </Button>
           </Flex>

@@ -9,12 +9,15 @@ import {
   Text,
   MenuList,
   Flex,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import { User } from "react-feather";
 import { toInteger } from "lodash";
 
 import { useAuth } from "../../state";
+import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
@@ -39,12 +42,16 @@ function Header() {
     window.localStorage.clear();
   }
 
+  const { colorMode, toggleColorMode } = useColorMode();
+  const backgroundColor = useColorModeValue("white", "gray.800");
+  const linkColor = useColorModeValue("black", "white");
+  const activeLinkColor = useColorModeValue("blue", "orange");
   return (
     <Container
       maxW={"100%"}
       position={"fixed"}
-      zIndex={1}
-      bg={"white"}
+      zIndex={2}
+      bg={backgroundColor}
       top={0}
       border="1px"
       borderColor="gray.200"
@@ -58,30 +65,51 @@ function Header() {
               <Breadcrumb spacing="8px" separator={""} p={2}>
                 <BreadcrumbItem
                   color={
-                    location.pathname === "/new-questions" ? "blue" : "black"
+                    location.pathname === "/new-questions"
+                      ? activeLinkColor
+                      : linkColor
                   }
                 >
                   <Link to="/new-questions">Home</Link>
                 </BreadcrumbItem>
                 <BreadcrumbItem
-                  color={location.pathname === "/" ? "blue" : "black"}
+                  color={
+                    location.pathname === "/" ? activeLinkColor : linkColor
+                  }
                 >
                   <Link to="/">Questions</Link>
                 </BreadcrumbItem>
                 <BreadcrumbItem
                   color={
-                    location.pathname === "/my-questions" ? "blue" : "black"
+                    location.pathname === "/my-questions"
+                      ? activeLinkColor
+                      : linkColor
                   }
                 >
                   <Link to="/my-questions">My questions</Link>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   <Menu>
-                    <MenuButton transition="all 0.2s">
+                    <MenuButton
+                      transition="all 0.2s"
+                      color={
+                        location.pathname === `/user/${loggedUserId}`
+                          ? activeLinkColor
+                          : linkColor
+                      }
+                    >
                       <User width={20} height={16} />
                     </MenuButton>
                     <MenuList zIndex={2}>
-                      <MenuItem fontSize={12} cursor={"default"}>
+                      <MenuItem
+                        fontSize={12}
+                        cursor={"default"}
+                        color={
+                          location.pathname === `/user/${loggedUserId}`
+                            ? activeLinkColor
+                            : linkColor
+                        }
+                      >
                         <Link to={`/user/${loggedUserId}`}>
                           <Text>Your profile</Text>
                         </Link>
@@ -94,6 +122,13 @@ function Header() {
                     </MenuList>
                   </Menu>
                 </BreadcrumbItem>
+                <BreadcrumbItem>
+                  {colorMode === "light" ? (
+                    <SunIcon onClick={toggleColorMode} />
+                  ) : (
+                    <MoonIcon onClick={toggleColorMode} />
+                  )}
+                </BreadcrumbItem>
               </Breadcrumb>
             </Flex>
             {isHeaderDisplyed && (
@@ -101,21 +136,27 @@ function Header() {
                 <Breadcrumb separator="-">
                   <BreadcrumbItem
                     color={
-                      location.pathname === "/new-questions" ? "blue" : "black"
+                      location.pathname === "/new-questions"
+                        ? activeLinkColor
+                        : linkColor
                     }
                   >
                     <Link to="/new-questions">New questions</Link>
                   </BreadcrumbItem>
                   <BreadcrumbItem
                     color={
-                      location.pathname === "/popular-users" ? "blue" : "black"
+                      location.pathname === "/popular-users"
+                        ? activeLinkColor
+                        : linkColor
                     }
                   >
                     <Link to="/popular-users">Popular users</Link>
                   </BreadcrumbItem>
                   <BreadcrumbItem
                     color={
-                      location.pathname === "/hot-questions" ? "blue" : "black"
+                      location.pathname === "/hot-questions"
+                        ? activeLinkColor
+                        : linkColor
                     }
                   >
                     <Link to="/hot-questions">Hot questions</Link>
@@ -127,28 +168,43 @@ function Header() {
         )}
         {!isLoggedIn && (
           <Flex>
-            <Breadcrumb spacing="8px" separator={""} p={2}>
+            <Breadcrumb spacing="8px" p={2}>
               <BreadcrumbItem
                 color={
-                  location.pathname === "/new-questions" ? "blue" : "black"
+                  location.pathname === "/new-questions"
+                    ? activeLinkColor
+                    : linkColor
                 }
               >
                 <Link to="/new-questions">Home</Link>
               </BreadcrumbItem>
               <BreadcrumbItem
-                color={location.pathname === "/questions" ? "blue" : "black"}
+                color={
+                  location.pathname === "/questions"
+                    ? activeLinkColor
+                    : linkColor
+                }
               >
                 <Link to="/questions">Questions</Link>
               </BreadcrumbItem>
               <BreadcrumbItem
-                color={location.pathname === "/login" ? "blue" : "black"}
+                color={
+                  location.pathname === "/login" ? activeLinkColor : linkColor
+                }
               >
                 <Link to="/login">Login</Link>
               </BreadcrumbItem>
               <BreadcrumbItem
-                color={location.pathname === "/" ? "blue" : "black"}
+                color={location.pathname === "/" ? activeLinkColor : linkColor}
               >
                 <Link to="/">Register</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                {colorMode === "light" ? (
+                  <SunIcon onClick={toggleColorMode} />
+                ) : (
+                  <MoonIcon onClick={toggleColorMode} />
+                )}
               </BreadcrumbItem>
             </Breadcrumb>
           </Flex>

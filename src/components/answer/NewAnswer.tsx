@@ -54,13 +54,7 @@ function NewAnswer(props: { questionId: number }) {
     newAnswerMutation.mutate(newAnswer);
   }
   return (
-    <Flex
-      padding={5}
-      backgroundColor={"gray.50"}
-      w={"100%"}
-      border={"1px solid"}
-      borderColor={"gray.200"}
-    >
+    <Flex padding={5} w={"100%"} border={"1px solid"} borderColor={"gray.200"}>
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <FormControl isInvalid={errors.content}>
           <Textarea
