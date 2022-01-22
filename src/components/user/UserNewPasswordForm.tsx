@@ -3,11 +3,13 @@ import {
   Button,
   FormControl,
   FormErrorMessage,
+  InputRightElement,
   FormLabel,
   Input,
   useToast,
   InputGroup,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import mutations from "../../api/mutations";
@@ -15,6 +17,8 @@ import { User } from "../../models/User";
 
 function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
   const toast = useToast();
+  const [show, setShow] = useState(false);
+
   const {
     handleSubmit,
     register,
@@ -43,6 +47,7 @@ function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
     };
     changePasswordMutation.mutate(data);
   }
+  const handleClick = () => setShow(!show);
 
   return (
     <Box>
@@ -52,7 +57,7 @@ function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
           <InputGroup>
             <Input
               isDisabled={props.isDisabled}
-              type="password"
+              type={show ? "text" : "password"}
               autoComplete="New password"
               placeholder="New password"
               {...register("password", {
@@ -63,6 +68,16 @@ function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
                 },
               })}
             />
+            <InputRightElement width="4.5rem">
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={handleClick}
+                colorScheme={"blue"}
+              >
+                {show ? "Hide" : "Show"}
+              </Button>
+            </InputRightElement>
           </InputGroup>
           <FormErrorMessage mb={"1rem"}>
             {errors.password && errors.password.message}

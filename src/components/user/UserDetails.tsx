@@ -14,6 +14,7 @@ import {
   FormErrorMessage,
   ModalFooter,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toInteger } from "lodash";
@@ -26,6 +27,7 @@ import { useState } from "react";
 import UserCurrentPassword from "./UserCurrentPassword";
 
 function UserDetails() {
+  const toast = useToast();
   const queryClient = useQueryClient();
   const params = useParams();
   const userId = params.id;
@@ -41,6 +43,12 @@ function UserDetails() {
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries("user");
+        toast({
+          title: `Profile data updated!`,
+          position: "top",
+          status: "success",
+          isClosable: true,
+        });
         onClose();
       },
     }
@@ -67,27 +75,43 @@ function UserDetails() {
       marginTop={20}
     >
       <Flex flexDirection={"column"}>
-        <Flex justifyContent={"space-between"} mb={2}>
+        <Flex
+          justifyContent={"space-between"}
+          mb={2}
+          flexDirection={{ base: "column", sm: "row" }}
+        >
           <Text fontSize={"sm"} fontWeight={"bold"}>
             First name
           </Text>
           <Text>{data?.data.firstName}</Text>
         </Flex>
-        <Flex justifyContent={"space-between"} mb={2}>
+        <Flex
+          justifyContent={"space-between"}
+          mb={2}
+          flexDirection={{ base: "column", sm: "row" }}
+        >
           <Text fontSize={"sm"} fontWeight={"bold"}>
-            First name
+            Last name
           </Text>
           <Text>{data?.data.lastName}</Text>
         </Flex>
-        <Flex justifyContent={"space-between"} mb={2}>
+        <Flex
+          justifyContent={"space-between"}
+          mb={2}
+          flexDirection={{ base: "column", sm: "row" }}
+        >
           <Text fontSize={"sm"} fontWeight={"bold"}>
             Email
           </Text>
           <Text>{data?.data.email}</Text>
         </Flex>
-        <Flex justifyContent={"space-between"} mb={2}>
+        <Flex
+          justifyContent={"space-between"}
+          flexDirection={{ base: "column", sm: "row" }}
+          mb={2}
+        >
           <UserCurrentPassword user={user} />
-          <Button colorScheme="blue" size="xs" onClick={onOpen}>
+          <Button colorScheme="blue" size="xs" onClick={onOpen} mb={1}>
             Change profile data
           </Button>
           <Modal isOpen={isOpen} onClose={onClose}>

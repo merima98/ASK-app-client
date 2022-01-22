@@ -5,15 +5,18 @@ import {
   Center,
   Container,
   Divider,
+  InputRightElement,
   FormControl,
   FormControlOptions,
   FormErrorMessage,
   Input,
   InputGroup,
+  useColorModeValue,
   InputLeftElement,
   Stack,
   useToast,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { ErrorOption, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,8 +33,10 @@ function Login() {
   } = useForm();
   const navigate = useNavigate();
   const toast = useToast();
-
+  const [show, setShow] = useState(false);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
+  const iconColor = useColorModeValue("black", "orange");
+  const inputBackgroundColor = useColorModeValue("white", "gray.700");
 
   const loginMutation = useMutation(mutations.login, {
     onSuccess: (data) => {
@@ -54,16 +59,21 @@ function Login() {
     loginMutation.mutate(values);
   }
 
+  const handleClick = () => setShow(!show);
   return (
     <Container border="1px" borderColor="gray.200" p={10} marginTop={20}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <FormControl isInvalid={errors.email}>
             <InputGroup>
-              <InputLeftElement zIndex={1} children={<EmailIcon />} />
+              <InputLeftElement
+                zIndex={1}
+                children={<EmailIcon color={iconColor} />}
+              />
               <Input
                 placeholder="Email"
                 type={"email"}
+                _focus={{ backgroundColor: inputBackgroundColor }}
                 {...register("email", {
                   required: "Email is required!",
                 })}
@@ -75,11 +85,15 @@ function Login() {
           </FormControl>
           <FormControl isInvalid={errors.password}>
             <InputGroup>
-              <InputLeftElement zIndex={1} children={<LockIcon />} />
+              <InputLeftElement
+                zIndex={1}
+                children={<LockIcon color={iconColor} />}
+              />
               <Input
+                _focus={{ backgroundColor: inputBackgroundColor }}
                 placeholder="Password"
                 autoComplete="Passowrd"
-                type={"password"}
+                type={show ? "text" : "password"}
                 {...register("password", {
                   required: "Password is required!",
                   minLength: {
@@ -88,6 +102,16 @@ function Login() {
                   },
                 })}
               />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={handleClick}
+                  colorScheme={"blue"}
+                >
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
             </InputGroup>
             <FormErrorMessage mb={"1rem"}>
               {errors.password && errors.password.message}

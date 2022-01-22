@@ -6,6 +6,7 @@ import {
   Divider,
   FormControl,
   FormControlOptions,
+  InputRightElement,
   FormErrorMessage,
   Input,
   InputGroup,
@@ -21,6 +22,7 @@ import { useToast } from "@chakra-ui/react";
 
 import { useAuth } from "../state";
 import mutations from "../api/mutations";
+import { useState } from "react";
 
 function Register() {
   const {
@@ -30,6 +32,7 @@ function Register() {
     formState: { errors },
   } = useForm();
 
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
   const toast = useToast();
@@ -52,6 +55,7 @@ function Register() {
   function onSubmit(values: FormControlOptions) {
     signupMutation.mutate(values);
   }
+  const handleClick = () => setShow(!show);
 
   return (
     <Container border="1px" borderColor="gray.200" p={10} marginTop={20}>
@@ -119,7 +123,7 @@ function Register() {
               <Input
                 placeholder="Password"
                 autoComplete="Passowrd"
-                type={"password"}
+                type={show ? "text" : "password"}
                 {...register("password", {
                   required: "Password is required!",
                   minLength: {
@@ -128,6 +132,16 @@ function Register() {
                   },
                 })}
               />
+              <InputRightElement width="4.5rem">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  onClick={handleClick}
+                  colorScheme={"blue"}
+                >
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
             </InputGroup>
             <FormErrorMessage mb={"1rem"}>
               {errors.password && errors.password.message}
