@@ -26,6 +26,7 @@ function SingleQuestion(props: Question) {
   const navigate = useNavigate();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const queryClient = useQueryClient();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { content, dateOfCreation, dislikes, id, likes, user, userId } = props;
 
   function convertDate(date?: string) {

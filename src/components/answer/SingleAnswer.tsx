@@ -8,6 +8,7 @@ import { Answer } from "../../models/Answer";
 import { useAuth } from "../../state";
 
 function SingleAnswer(props: Answer) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { content, dateOfCreation, dislikes, id, likes, user, userId } = props;
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
 

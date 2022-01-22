@@ -1,5 +1,9 @@
 # ASK application client
 
-In the project directory, you can run:
+![Screenshot](docs/images/screenshot.png)
 
-### `yarn run start`
+### `Getting started`
+
+    git clone https://github.com/merima98/ASK-app-client
+    yarn install
+    yarn run start
