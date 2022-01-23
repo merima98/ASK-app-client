@@ -13,11 +13,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import { User } from "react-feather";
+import { User, Moon, Sun } from "react-feather";
 import { toInteger } from "lodash";
 
 import { useAuth } from "../../state";
-import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
@@ -124,9 +123,19 @@ function Header() {
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   {colorMode === "light" ? (
-                    <SunIcon onClick={toggleColorMode} />
+                    <Sun
+                      onClick={toggleColorMode}
+                      width={20}
+                      height={16}
+                      cursor="pointer"
+                    />
                   ) : (
-                    <MoonIcon onClick={toggleColorMode} />
+                    <Moon
+                      onClick={toggleColorMode}
+                      width={20}
+                      height={16}
+                      cursor="pointer"
+                    />
                   )}
                 </BreadcrumbItem>
               </Breadcrumb>
@@ -201,9 +210,19 @@ function Header() {
               </BreadcrumbItem>
               <BreadcrumbItem>
                 {colorMode === "light" ? (
-                  <SunIcon onClick={toggleColorMode} />
+                  <Sun
+                    onClick={toggleColorMode}
+                    width={20}
+                    height={16}
+                    cursor="pointer"
+                  />
                 ) : (
-                  <MoonIcon onClick={toggleColorMode} />
+                  <Moon
+                    onClick={toggleColorMode}
+                    width={20}
+                    height={16}
+                    cursor="pointer"
+                  />
                 )}
               </BreadcrumbItem>
             </Breadcrumb>

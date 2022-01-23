@@ -4,6 +4,7 @@ import {
   Center,
   Container,
   Divider,
+  useColorModeValue,
   FormControl,
   FormControlOptions,
   InputRightElement,
@@ -13,7 +14,7 @@ import {
   InputLeftElement,
   Stack,
 } from "@chakra-ui/react";
-import { EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { Mail, Lock } from "react-feather";
 import { Link } from "react-router-dom";
 import { useMutation } from "react-query";
 import { ErrorOption, useForm } from "react-hook-form";
@@ -36,6 +37,7 @@ function Register() {
   const navigate = useNavigate();
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
   const toast = useToast();
+  const iconColor = useColorModeValue("black", "orange");
   const signupMutation = useMutation(mutations.register, {
     onSuccess: (data) => {
       window.localStorage.setItem("userId", data.data.user.id);
@@ -104,7 +106,10 @@ function Register() {
           <Divider />
           <FormControl isInvalid={errors.email}>
             <InputGroup>
-              <InputLeftElement zIndex={1} children={<EmailIcon />} />
+              <InputLeftElement
+                zIndex={1}
+                children={<Mail color={iconColor} width={20} height={16} />}
+              />
               <Input
                 data-cy="input-email"
                 placeholder="Email"
@@ -120,7 +125,10 @@ function Register() {
           </FormControl>
           <FormControl isInvalid={errors.password}>
             <InputGroup>
-              <InputLeftElement zIndex={1} children={<LockIcon />} />
+              <InputLeftElement
+                zIndex={1}
+                children={<Lock color={iconColor} width={20} height={16} />}
+              />
               <Input
                 data-cy="input-password"
                 placeholder="Password"

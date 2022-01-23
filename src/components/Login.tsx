@@ -1,4 +1,4 @@
-import { EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { Mail, Lock } from "react-feather";
 import {
   Box,
   Button,
@@ -69,7 +69,7 @@ function Login() {
             <InputGroup>
               <InputLeftElement
                 zIndex={1}
-                children={<EmailIcon color={iconColor} />}
+                children={<Mail color={iconColor} width={20} height={16} />}
               />
               <Input
                 data-cy="input-email"
@@ -89,7 +89,7 @@ function Login() {
             <InputGroup>
               <InputLeftElement
                 zIndex={1}
-                children={<LockIcon color={iconColor} />}
+                children={<Lock color={iconColor} width={20} height={16} />}
               />
               <Input
                 data-cy="input-password"

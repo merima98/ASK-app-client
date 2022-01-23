@@ -1,4 +1,3 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Box,
   Menu,
@@ -9,7 +8,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { toInteger } from "lodash";
-import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { Moon, Sun, ChevronDown } from "react-feather";
+
 import { Link, useLocation } from "react-router-dom";
 
 import { useAuth } from "../../state";
@@ -50,7 +50,7 @@ function MenuHeader() {
           borderWidth="1px"
           _hover={{ bg: buttonHoverColor }}
         >
-          ASK <ChevronDownIcon />
+          ASK <ChevronDown width={10} height={10} />
         </MenuButton>
         {isLoggedIn && (
           <MenuList zIndex={2}>
@@ -90,9 +90,9 @@ function MenuHeader() {
             </MenuItem>
             <MenuItem fontSize={12}>
               {colorMode === "light" ? (
-                <SunIcon onClick={toggleColorMode} />
+                <Sun onClick={toggleColorMode} width={20} height={16} />
               ) : (
-                <MoonIcon onClick={toggleColorMode} />
+                <Moon onClick={toggleColorMode} width={20} height={16} />
               )}
             </MenuItem>
           </MenuList>
@@ -133,11 +133,11 @@ function MenuHeader() {
             >
               <Link to="/">Register</Link>
             </MenuItem>
-            <MenuItem fontSize={12}>
+            <MenuItem>
               {colorMode === "light" ? (
-                <SunIcon onClick={toggleColorMode} />
+                <Sun onClick={toggleColorMode} width={20} height={16} />
               ) : (
-                <MoonIcon onClick={toggleColorMode} />
+                <Moon onClick={toggleColorMode} width={20} height={16} />
               )}
             </MenuItem>
           </MenuList>
