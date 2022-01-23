@@ -1,11 +1,12 @@
 import { Box, Button, Center, Container } from "@chakra-ui/react";
 import { useState } from "react";
-import queries from "../../api/queries";
 import { useLocation } from "react-router-dom";
-import { Question } from "../../models/Question";
 import { toInteger } from "lodash";
-import SingleQuestion from "../question/SingleQuestion";
 import { useQuery } from "react-query";
+
+import queries from "../../api/queries";
+import { Question } from "../../models/Question";
+import SingleQuestion from "../question/SingleQuestion";
 
 function Home() {
   const location = useLocation();

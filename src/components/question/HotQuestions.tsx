@@ -1,4 +1,5 @@
 import { Container } from "@chakra-ui/react";
+
 import QuestionsList from "../question/QuestionsList";
 
 function HotQuestions() {

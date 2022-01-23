@@ -2,6 +2,7 @@ import { Container, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
+
 import queries from "../../api/queries";
 import { Question } from "../../models/Question";
 import { useAuth } from "../../state";

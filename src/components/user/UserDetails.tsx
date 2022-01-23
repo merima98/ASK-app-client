@@ -21,9 +21,10 @@ import { toInteger } from "lodash";
 import { useParams } from "react-router-dom";
 import queries from "../../api/queries";
 import { FieldValues, useForm } from "react-hook-form";
+import { useState } from "react";
+
 import { User } from "../../models/User";
 import mutations from "../../api/mutations";
-import { useState } from "react";
 import UserCurrentPassword from "./UserCurrentPassword";
 
 function UserDetails() {
@@ -59,7 +60,7 @@ function UserDetails() {
     updateProfileDataMutation.mutate();
   }
 
-  let user: User = data?.data;
+  const user: User = data?.data;
 
   const {
     handleSubmit,

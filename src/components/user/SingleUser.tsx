@@ -1,4 +1,5 @@
 import { Container, Flex, Text, Box } from "@chakra-ui/react";
+
 import { User } from "../../models/User";
 
 function SingleUser(props: { user: User }) {

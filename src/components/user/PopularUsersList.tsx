@@ -1,5 +1,6 @@
 import { Container } from "@chakra-ui/react";
 import { useQuery } from "react-query";
+
 import queries from "../../api/queries";
 import { User } from "../../models/User";
 import SingleUser from "./SingleUser";

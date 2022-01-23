@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { toInteger } from "lodash";
 import { Moon, Sun, ChevronDown } from "react-feather";
-
 import { Link, useLocation } from "react-router-dom";
 
 import { useAuth } from "../../state";

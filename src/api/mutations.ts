@@ -1,5 +1,6 @@
 import { FormControlOptions } from "@chakra-ui/react";
 import { FieldValues } from "react-hook-form";
+
 import axios from "../httpClient";
 
 function register(credentials: FormControlOptions) {
