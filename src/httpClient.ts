@@ -5,9 +5,14 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-    function (config: any) {
-        config.headers.authorization = localStorage.getItem("token");
-        return config;
+    function (config) {
+        return {
+            ...config,
+            headers: {
+                authorization: localStorage.getItem("token")
+            }
+        }
+
     },
     function (error) {
         return Promise.reject(error);

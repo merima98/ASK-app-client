@@ -109,12 +109,7 @@ function Login() {
                 })}
               />
               <InputRightElement width="4.5rem">
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  onClick={handleClick}
-                  colorScheme={"blue"}
-                >
+                <Button h="1.75rem" size="sm" onClick={handleClick}>
                   {show ? (
                     <EyeOff color={iconColor} width={20} height={16} />
                   ) : (
