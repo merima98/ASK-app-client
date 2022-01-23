@@ -139,6 +139,7 @@ function AnswerDetails() {
                         colorScheme="green"
                         size="xs"
                         mr={1}
+                        isLoading={updateAnswerMutation.isLoading}
                       >
                         Save
                       </Button>

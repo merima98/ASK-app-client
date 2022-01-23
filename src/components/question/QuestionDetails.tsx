@@ -151,6 +151,7 @@ function QuestionDetails() {
                         colorScheme="green"
                         size="xs"
                         mr={1}
+                        isLoading={updateQuestionMutation.isLoading}
                       >
                         Save
                       </Button>

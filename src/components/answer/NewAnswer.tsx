@@ -71,7 +71,12 @@ function NewAnswer(props: { questionId: number }) {
             {errors.content && errors.content.message}
           </FormErrorMessage>
         </FormControl>
-        <Button type="submit" colorScheme="blue" size="xs">
+        <Button
+          type="submit"
+          colorScheme="blue"
+          size="xs"
+          isLoading={newAnswerMutation.isLoading}
+        >
           Add answer
         </Button>
       </form>

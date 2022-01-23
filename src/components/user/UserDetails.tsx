@@ -166,7 +166,13 @@ function UserDetails() {
                   </FormControl>
                 </ModalBody>
                 <ModalFooter>
-                  <Button type="submit" colorScheme="green" size="xs" mr={1}>
+                  <Button
+                    type="submit"
+                    colorScheme="green"
+                    size="xs"
+                    mr={1}
+                    isLoading={updateProfileDataMutation.isLoading}
+                  >
                     Save
                   </Button>
                   <Button size="xs" onClick={onClose}>

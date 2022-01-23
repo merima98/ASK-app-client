@@ -72,7 +72,12 @@ function NewQuestion() {
               {errors.content && errors.content.message}
             </FormErrorMessage>
           </FormControl>
-          <Button type="submit" colorScheme="blue" size="xs">
+          <Button
+            type="submit"
+            colorScheme="blue"
+            size="xs"
+            isLoading={newQuestionMutation.isLoading}
+          >
             Add question
           </Button>
         </form>
