@@ -127,6 +127,7 @@ function Login() {
             boxShadow={"sm"}
             _hover={{ boxShadow: "md" }}
             data-cy="login-button"
+            isLoading={loginMutation.isLoading}
           >
             Login
           </Button>

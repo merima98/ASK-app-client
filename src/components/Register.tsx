@@ -67,6 +67,7 @@ function Register() {
           <FormControl isInvalid={errors.firstName}>
             <InputGroup>
               <InputLeftElement
+                zIndex={-1}
                 children={
                   <ChevronRight color={iconColor} width={20} height={16} />
                 }
@@ -91,6 +92,7 @@ function Register() {
           <FormControl isInvalid={errors.lastName}>
             <InputGroup>
               <InputLeftElement
+                zIndex={-1}
                 children={
                   <ChevronRight color={iconColor} width={20} height={16} />
                 }
@@ -170,6 +172,7 @@ function Register() {
             boxShadow={"sm"}
             _hover={{ boxShadow: "md" }}
             data-cy="register-button"
+            isLoading={signupMutation.isLoading}
           >
             Register
           </Button>
