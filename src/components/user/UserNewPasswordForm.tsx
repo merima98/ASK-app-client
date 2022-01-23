@@ -5,6 +5,7 @@ import {
   FormErrorMessage,
   InputRightElement,
   FormLabel,
+  useColorModeValue,
   Input,
   useToast,
   InputGroup,
@@ -12,6 +13,7 @@ import {
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { Eye, EyeOff } from "react-feather";
 
 import mutations from "../../api/mutations";
 import { User } from "../../models/User";
@@ -19,6 +21,7 @@ import { User } from "../../models/User";
 function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
   const toast = useToast();
   const [show, setShow] = useState(false);
+  const iconColor = useColorModeValue("black", "orange");
 
   const {
     handleSubmit,
@@ -48,7 +51,10 @@ function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
     };
     changePasswordMutation.mutate(data);
   }
-  const handleClick = () => setShow(!show);
+
+  function handleClick() {
+    setShow(!show);
+  }
 
   return (
     <Box>
@@ -70,13 +76,12 @@ function UserNewPasswordForm(props: { isDisabled: boolean; user: User }) {
               })}
             />
             <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={handleClick}
-                colorScheme={"blue"}
-              >
-                {show ? "Hide" : "Show"}
+              <Button size="sm" onClick={handleClick}>
+                {show ? (
+                  <EyeOff color={iconColor} width={20} height={16} />
+                ) : (
+                  <Eye color={iconColor} width={20} height={16} />
+                )}
               </Button>
             </InputRightElement>
           </InputGroup>

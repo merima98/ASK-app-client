@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ErrorOption, useForm } from "react-hook-form";
+import { Eye, EyeOff } from "react-feather";
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -59,7 +60,10 @@ function Login() {
     loginMutation.mutate(values);
   }
 
-  const handleClick = () => setShow(!show);
+  function handleClick() {
+    setShow(!show);
+  }
+
   return (
     <Container border="1px" borderColor="gray.200" p={10} marginTop={20}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -111,7 +115,11 @@ function Login() {
                   onClick={handleClick}
                   colorScheme={"blue"}
                 >
-                  {show ? "Hide" : "Show"}
+                  {show ? (
+                    <EyeOff color={iconColor} width={20} height={16} />
+                  ) : (
+                    <Eye color={iconColor} width={20} height={16} />
+                  )}
                 </Button>
               </InputRightElement>
             </InputGroup>

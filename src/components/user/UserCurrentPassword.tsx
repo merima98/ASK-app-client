@@ -15,11 +15,13 @@ import {
   Input,
   Stack,
   InputGroup,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { Eye, EyeOff } from "react-feather";
 
 import mutations from "../../api/mutations";
 import { User } from "../../models/User";
@@ -30,6 +32,7 @@ function UserCurrentPassword(props: { user: User }) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const toast = useToast();
+  const iconColor = useColorModeValue("black", "orange");
 
   const {
     handleSubmit,
@@ -76,7 +79,10 @@ function UserCurrentPassword(props: { user: User }) {
     };
     checkPasswordMutation.mutate(request);
   }
-  const handleClick = () => setShow(!show);
+
+  function handleClick() {
+    setShow(!show);
+  }
 
   return (
     <>
@@ -108,13 +114,12 @@ function UserCurrentPassword(props: { user: User }) {
                         autoComplete="Current password"
                       />
                       <InputRightElement width="4.5rem">
-                        <Button
-                          h="1.75rem"
-                          size="sm"
-                          onClick={handleClick}
-                          colorScheme={"blue"}
-                        >
-                          {show ? "Hide" : "Show"}
+                        <Button size="sm" onClick={handleClick}>
+                          {show ? (
+                            <EyeOff color={iconColor} width={20} height={16} />
+                          ) : (
+                            <Eye color={iconColor} width={20} height={16} />
+                          )}
                         </Button>
                       </InputRightElement>
                     </InputGroup>

@@ -14,7 +14,7 @@ import {
   InputLeftElement,
   Stack,
 } from "@chakra-ui/react";
-import { Mail, Lock } from "react-feather";
+import { Mail, Lock, Eye, EyeOff, ChevronRight } from "react-feather";
 import { Link } from "react-router-dom";
 import { useMutation } from "react-query";
 import { ErrorOption, useForm } from "react-hook-form";
@@ -56,7 +56,9 @@ function Register() {
   function onSubmit(values: FormControlOptions) {
     signupMutation.mutate(values);
   }
-  const handleClick = () => setShow(!show);
+  function handleClick() {
+    setShow(!show);
+  }
 
   return (
     <Container border="1px" borderColor="gray.200" p={10} marginTop={20}>
@@ -64,7 +66,11 @@ function Register() {
         <Stack spacing={2}>
           <FormControl isInvalid={errors.firstName}>
             <InputGroup>
-              <InputLeftElement />
+              <InputLeftElement
+                children={
+                  <ChevronRight color={iconColor} width={20} height={16} />
+                }
+              />
               <Input
                 data-cy="input-firstName"
                 placeholder="First name"
@@ -84,7 +90,11 @@ function Register() {
           </FormControl>
           <FormControl isInvalid={errors.lastName}>
             <InputGroup>
-              <InputLeftElement />
+              <InputLeftElement
+                children={
+                  <ChevronRight color={iconColor} width={20} height={16} />
+                }
+              />
               <Input
                 data-cy="input-lastName"
                 placeholder="Last name"
@@ -142,13 +152,12 @@ function Register() {
                 })}
               />
               <InputRightElement width="4.5rem">
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  onClick={handleClick}
-                  colorScheme={"blue"}
-                >
-                  {show ? "Hide" : "Show"}
+                <Button size="sm" onClick={handleClick}>
+                  {show ? (
+                    <EyeOff color={iconColor} width={20} height={16} />
+                  ) : (
+                    <Eye color={iconColor} width={20} height={16} />
+                  )}
                 </Button>
               </InputRightElement>
             </InputGroup>
