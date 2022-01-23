@@ -14,11 +14,12 @@ function SingleQuestion(props: Question) {
     if (location.pathname === "/" || location.pathname === "/hot-questions") {
       return "questions-list";
     }
-    if (
-      location.pathname === "/new-questions" ||
-      location.pathname === "/my-questions"
-    ) {
+    if (location.pathname === "/new-questions") {
       return "paginated-questions";
+    }
+
+    if (location.pathname === "/my-questions") {
+      return "my-questions";
     }
     return location.pathname;
   }

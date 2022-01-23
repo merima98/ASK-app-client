@@ -2,6 +2,7 @@ import AnswerDetails from "../components/answer/AnswerDetails";
 import Home from "../components/home/Home";
 import Login from "../components/Login";
 import HotQuestions from "../components/question/HotQuestions";
+import MyQuestions from "../components/question/MyQuestions";
 import QuestionDetails from "../components/question/QuestionDetails";
 import QuestionsList from "../components/question/QuestionsList";
 import Register from "../components/Register";
@@ -31,7 +32,7 @@ const LOGGED_IN_DEFAULT_LAYOUT_ROUTES = [
     },
     {
         path: "/my-questions",
-        element: Home,
+        element: MyQuestions,
     },
     {
         path: "/user/:id",

@@ -1,5 +1,4 @@
 import { Container, Flex } from "@chakra-ui/react";
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 
@@ -12,14 +11,8 @@ import SingleQuestion from "./SingleQuestion";
 function QuestionsList() {
   const location = useLocation();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
-  const [showForm, setShowForm] = useState(false);
 
   function detectLocation() {
-    if (location.pathname === "/" && isLoggedIn) {
-      setShowForm(true);
-    } else {
-      setShowForm(false);
-    }
     if (location.pathname === "/questions" || location.pathname === "/") {
       return queries.questions();
     }
@@ -32,7 +25,7 @@ function QuestionsList() {
   const questions = data ? data?.data : [];
   return (
     <Container p={10}>
-      {showForm && (
+      {location.pathname === "/" && isLoggedIn && (
         <Flex>
           <NewQuestion />
         </Flex>

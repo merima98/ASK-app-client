@@ -1,32 +1,39 @@
-import { Box, Button, Center, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useState } from "react";
+import { toInteger } from "lodash";
+import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
 import queries from "../../api/queries";
 import { Question } from "../../models/Question";
 import SingleQuestion from "../question/SingleQuestion";
 
-function Home() {
+function MyQuestions() {
   const defaultPageSize = 20;
   const [pageSize, setPageSize] = useState(defaultPageSize);
-  const [isButtonVisible, setButtonVisible] = useState(true);
+  const textColor = useColorModeValue("blue", "orange");
+
+  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
 
   const { data } = useQuery(
-    ["paginated-questions", pageSize],
-    () => queries.paginatedQuestions(pageSize),
+    ["my-questions", pageSize],
+    () => queries.getUserQuestions(pageSize, loggedUserId),
     { keepPreviousData: true }
   );
 
   const questions = data?.data;
 
   function loadMoreQuestions() {
-    if (pageSize <= questions?.length) {
-      let newPageSize = pageSize;
-      newPageSize += defaultPageSize;
-      setPageSize(newPageSize);
-    } else {
-      setButtonVisible(false);
-    }
+    let newPageSize = pageSize;
+    newPageSize += defaultPageSize;
+    setPageSize(newPageSize);
   }
 
   return (
@@ -48,7 +55,7 @@ function Home() {
             );
           })}
         </Box>
-        {isButtonVisible && (
+        {questions?.length ? (
           <Center>
             <Button
               mb={3}
@@ -59,10 +66,19 @@ function Home() {
               Load more
             </Button>
           </Center>
+        ) : (
+          <Center p={10}>
+            <Box textAlign={"center"}>
+              <Text>Oops no questions yet.</Text>
+              <Text textColor={textColor}>
+                <Link to="/">Add new Question</Link>.
+              </Text>
+            </Box>
+          </Center>
         )}
       </Container>
     </Container>
   );
 }
 
-export default Home;
+export default MyQuestions;
