@@ -1,6 +1,6 @@
 # ASK application client
 
-![Screenshot](docs/images/screenshot.png)
+![Screenshot](docs/images/screenshotImage.png)
 
 ### `Getting started`
 
