@@ -20,7 +20,7 @@ import { useAuth } from "../../state";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
-  const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
+  const setLoggedOut = useAuth((state) => state.setLoggedOut);
   const loggedUserId = toInteger(window.localStorage.getItem("userId"));
   const location = useLocation();
   const isHeaderDisplyed = detectLocation();
@@ -37,8 +37,7 @@ function Header() {
   }
 
   function logout() {
-    setIsLoggedIn(false, "");
-    window.localStorage.clear();
+    setLoggedOut(false);
   }
 
   const { colorMode, toggleColorMode } = useColorMode();

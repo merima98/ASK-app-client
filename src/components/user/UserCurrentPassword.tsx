@@ -37,7 +37,8 @@ function UserCurrentPassword(props: { user: User }) {
     register,
     formState: { errors },
   } = useForm();
-  let token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   const [show, setShow] = useState(false);
   const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
 
@@ -47,8 +48,8 @@ function UserCurrentPassword(props: { user: User }) {
       reset();
     },
     onError: () => {
-      if (token) {
-        setIsLoggedIn(true, token);
+      if (token && userId) {
+        setIsLoggedIn(true, userId, token);
       }
       toast({
         title: `Incorrect password!`,

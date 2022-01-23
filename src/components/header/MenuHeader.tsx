@@ -17,12 +17,11 @@ function MenuHeader() {
   const { colorMode, toggleColorMode } = useColorMode();
   const location = useLocation();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
-  const setIsLoggedIn = useAuth((state) => state.setIsLoggedIn);
+  const setLoggedOut = useAuth((state) => state.setLoggedOut);
   const loggedUserId = toInteger(window.localStorage.getItem("userId"));
 
   function logout() {
-    setIsLoggedIn(false, "");
-    window.localStorage.clear();
+    setLoggedOut(false);
   }
 
   const linkColor = useColorModeValue("black", "white");

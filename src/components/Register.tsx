@@ -40,8 +40,7 @@ function Register() {
   const iconColor = useColorModeValue("black", "orange");
   const signupMutation = useMutation(mutations.register, {
     onSuccess: (data) => {
-      window.localStorage.setItem("userId", data.data.user.id);
-      setIsLoggedIn(true, data.data.accessToken);
+      setIsLoggedIn(true, data.data.user.id, data.data.accessToken);
       navigate("/");
     },
     onError: (error: ErrorOption) => {
