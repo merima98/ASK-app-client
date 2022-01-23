@@ -14,7 +14,7 @@
     yarn start
 ```
 
-## `Testing`
+### `Testing`
 
 Project contains e2e(`cypress`) tests.
 
@@ -22,6 +22,6 @@ Project contains e2e(`cypress`) tests.
 "cypress:open": "cypress open",
 ```
 
-## `License`
+### `License`
 
 [MIT](./LICENSE)
