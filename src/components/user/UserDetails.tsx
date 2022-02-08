@@ -17,7 +17,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { toInteger } from "lodash";
 import { useParams } from "react-router-dom";
 import queries from "../../api/queries";
 import { FieldValues, useForm } from "react-hook-form";
@@ -35,12 +34,10 @@ function UserDetails() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [profileData, setProfileData] = useState({});
 
-  const { data } = useQuery("user", () =>
-    queries.getUserById(toInteger(userId))
-  );
+  const { data } = useQuery("user", () => queries.getUserById(Number(userId)));
 
   const updateProfileDataMutation = useMutation(
-    () => mutations.updateProfileData(toInteger(userId), profileData),
+    () => mutations.updateProfileData(Number(userId), profileData),
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries("user");

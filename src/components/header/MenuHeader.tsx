@@ -7,7 +7,6 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { toInteger } from "lodash";
 import { Moon, Sun, ChevronDown } from "react-feather";
 import { Link, useLocation } from "react-router-dom";
 
@@ -18,7 +17,7 @@ function MenuHeader() {
   const location = useLocation();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setLoggedOut = useAuth((state) => state.setLoggedOut);
-  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
+  const loggedUserId = Number(window.localStorage.getItem("userId"));
 
   function logout() {
     setLoggedOut(false);

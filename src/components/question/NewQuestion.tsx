@@ -7,7 +7,6 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { toInteger } from "lodash";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 
@@ -49,7 +48,7 @@ function NewQuestion() {
       likes: 0,
       dislikes: 0,
       dateOfCreation: new Date().toISOString(),
-      userId: toInteger(window.localStorage.getItem("userId")?.toString()),
+      userId: Number(window.localStorage.getItem("userId")?.toString()),
     };
     newQuestionMutation.mutate(newQuestion);
   }

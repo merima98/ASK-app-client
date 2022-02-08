@@ -14,14 +14,13 @@ import {
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import { User, Moon, Sun } from "react-feather";
-import { toInteger } from "lodash";
 
 import { useAuth } from "../../state";
 
 function Header() {
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
   const setLoggedOut = useAuth((state) => state.setLoggedOut);
-  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
+  const loggedUserId = Number(window.localStorage.getItem("userId"));
   const location = useLocation();
   const isHeaderDisplyed = detectLocation();
 

@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { toInteger } from "lodash";
 import { format } from "date-fns";
 import {
   AlertDialog,
@@ -43,12 +42,12 @@ function AnswerDetails() {
   } = useForm();
   const params = useParams();
   const isLoggedIn = useAuth((state) => state.isLoggedIn);
-  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
+  const loggedUserId = Number(window.localStorage.getItem("userId"));
   const queryClient = useQueryClient();
   const [newContent, setContent] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data } = useQuery("answer", () =>
-    queries.getAnswerById(toInteger(params.id))
+    queries.getAnswerById(Number(params.id))
   );
   const answer: Answer = data?.data;
 

@@ -7,7 +7,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { toInteger } from "lodash";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
@@ -20,7 +19,7 @@ function MyQuestions() {
   const [pageSize, setPageSize] = useState(defaultPageSize);
   const textColor = useColorModeValue("blue", "orange");
 
-  const loggedUserId = toInteger(window.localStorage.getItem("userId"));
+  const loggedUserId = Number(window.localStorage.getItem("userId"));
 
   const { data } = useQuery(
     ["my-questions", pageSize],

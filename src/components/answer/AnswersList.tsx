@@ -1,5 +1,4 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { toInteger } from "lodash";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import queries from "../../api/queries";
@@ -12,7 +11,7 @@ function AnswersList() {
   const number = params.id;
 
   const { data } = useQuery("answers-list", () =>
-    queries.getAnswersByQuestionById(toInteger(number))
+    queries.getAnswersByQuestionById(Number(number))
   );
   const answers = data && data?.data;
 
